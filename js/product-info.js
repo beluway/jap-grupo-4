@@ -171,12 +171,25 @@ document.getElementById("send-comment").addEventListener("submit", function(e) {
 });
 
 //Para poner el modo oscuro
-const chkOscuro = document.getElementById('chkOscuro');
+const chkOscuro = document.getElementById('toggleDarkMode');
 const divFondo = document.getElementById('fondo');
 
-chkOscuro.addEventListener('change',()=>{
-divFondo.classList.toggle("darkMode",chkOscuro.checked);
+// Aplicar preferencia al cargar la página
+window.addEventListener('load', () => {
+  const modo = localStorage.getItem('modoOscuro');
+  if (modo === "true") {
+    divFondo.classList.add("dark-mode");
+    chkOscuro.checked = true;
+  } else {
+    divFondo.classList.remove("dark-mode");
+    chkOscuro.checked = false;
+  }
 });
 
+// Cambiar modo oscuro y guardar preferencia
+chkOscuro.addEventListener('change', () => {
+  divFondo.classList.toggle("dark-mode", chkOscuro.checked);
+  localStorage.setItem('modoOscuro', chkOscuro.checked);
+});
 
 

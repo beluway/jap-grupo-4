@@ -189,10 +189,111 @@ a.custom-card:hover {
   color: orange;
 }
 
+#volverInicio {
+  margin-top: 20%
+}
 /*Acá va la clase de modo oscuro*/
-.darkMode{
-  background-color: rgb(26, 25, 25);
-  color: #fff;
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+#fondo.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin-top: 12px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 17px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #f39821;
+}
+
+input:checked + .slider:before {
+  transform: translateX(13px);
+}
+
+.label-text {
+  font-size: 14px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+#fondo.dark-mode #volverListado {
+  color: white !important;
+}
+.dark-mode input {
+  color: #fff; 
+  background-color: #222; 
+  border: 1px solid #555;
+}
+.dark-mode div.profile-pic {
+  background-color: whitesmoke;
+}
+.dark-mode #perfilForm {
+  background-color: #2c2c2c;
+  border: 1px solid whitesmoke;
+  border-radius: 4px ;
+}
+/* Texto general */
+#fondo.dark-mode p,
+#fondo.dark-mode span,
+#fondo.dark-mode h1,
+#fondo.dark-mode h2,
+#fondo.dark-mode h3,
+#fondo.dark-mode h4,
+#fondo.dark-mode h5,
+#fondo.dark-mode h6,
+#fondo.dark-mode td,
+#fondo.dark-mode,#fondo.card-text,#fondo.m-3,#fondo.dark-mode a
+
+ {
+  color: white !important;
+}
+
+#fondo.dark-mode.profile-pic input{
+  background-color:#333 !important;
+}
+#fondo.dark-mode div,#fondo.dark-mode.card,#fondo.dark-mode.btn-lg{
+  background-color: black !important;
+}
+#fondo.dark-mode,#fondo.dark-mode.album{
+  background-color: black !important;
+}
+#fondo.dark-mode,#fondo.text-muted,#fondo.dark-mode.btn{
+  background-color: black !important;
 }
 
 @media screen and (min-width:300px) and (max-width: 600px){
@@ -213,3 +314,132 @@ a.custom-card:hover {
 }
 
 
+#fondo.dark-mode .container .row.mb-3 {
+  color: #ffffff !important;
+}
+
+#fondo.dark-mode #titulos h4,
+#fondo.dark-mode #ventas,
+#fondo.dark-mode #precio,
+#fondo.dark-mode #categoria {
+  color: #ffffff !important;
+}
+
+#fondo.dark-mode #descripcion {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border: 1px solid #333 !important;
+}
+
+#fondo.dark-mode #comprar {
+  background-color: #f39821 !important;
+  color: #000 !important;
+  border: none !important;
+}
+
+
+#fondo.dark-mode .container * {
+  color: #ffffff !important;
+}
+
+
+#fondo.dark-mode .btn-orden {
+  background-color: #222 !important;  
+  color: #fff !important;             
+  border: 1px solid #444 !important;  
+}
+
+#fondo.dark-mode .btn-orden:hover {
+  background-color: #333 !important;  
+}
+
+
+#fondo.dark-mode .btn-orden .material-icons {
+  color: #f0f0f0 !important;
+}
+
+
+#fondo.dark-mode .filtros label,
+#fondo.dark-mode .filtros p {
+  color: white !important;
+}
+
+#fondo.dark-mode .filtros input {
+  background-color: #333 !important;
+  color: white !important;
+  border: 1px solid #555 !important;
+}
+
+#fondo.dark-mode .filtros input::placeholder {
+  color: #aaa !important;
+}
+
+#fondo.dark-mode .btn-light {
+  background-color: #2c2c2c !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #444 !important;
+}
+
+#fondo.dark-mode .btn-light:hover {
+  background-color: #3a3a3a !important;
+  color: #ffd700 !important; 
+}
+
+#fondo.dark-mode .btn-link {
+  color: #66aaff !important;
+}
+
+#fondo.dark-mode .btn-link:hover {
+  color: #99ccff !important;
+}
+
+#fondo.dark-mode .form-control {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #444 !important;
+}
+
+#fondo.dark-mode .form-control::placeholder {
+  color: #999 !important;
+}
+
+#fondo.dark-mode .filter-container p {
+  color: #f1f1f1 !important;
+}
+
+#fondo.dark-mode .list-group-item {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #333 !important;
+}
+
+#fondo.dark-mode .list-group-item:hover {
+  background-color: #2c2c2c !important;
+}
+
+
+#fondo.dark-mode .btn-group-toggle .btn-light {
+  background-color: #2c2c2c !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #444 !important;
+}
+
+#fondo.dark-mode .btn-group-toggle .btn-light:hover {
+  background-color: #3a3a3a !important;
+  color: #ffd700 !important;
+  }
+
+  .profile-pic img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.upload-icon {
+  cursor: pointer;
+  color: #007bff;
+  font-size: 24px;
+  margin-top: 5px;
+}

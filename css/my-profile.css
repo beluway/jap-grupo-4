@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  #TuPerfil {
+    max-width: 600px;
+    margin: 40px auto;
+    text-align: center;
+  }
+
+    .profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 5% auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #888;
+    background-color: #ddd;
+    flex-direction: column;
+    transition:0.3s;
+    cursor:pointer;
+  }
+.profile-pic:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.profile-pic:hover #icono {
+  opacity: 0.5;
+}
+
+.profile-pic:hover .upload-icon {
+  opacity: 1;
+}
+.profile-pic input[type="file"]{
+    z-index: 10; 
+}
+#icono{
+  position:absolute;
+}
+
+
+  input[type="text"], input[type="email"], input[type="tel"] {
+    width: 45%;
+    padding: 2%;
+    margin: 2%;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+  }
+
+    button {
+    background-color: orange;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 2%
+  }
+
+    button:hover {
+    background-color: #e69500;
+  }
+
+    .cancelar {
+    margin-left: 5%;
+    background: none;
+    color: gray;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  input[type="file"]{
+    display:none;
+  }
+
+  #volverInicio {
+    margin-top: 10%;
+  }
+

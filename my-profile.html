@@ -8,10 +8,12 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-<link href="css/my-profile.css" rel="stylesheet">
+  <link href="css/my-profile.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+  <div id="fondo">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -30,32 +32,50 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" id="userName" href=""></a>
+          </li>
+          <li class="nav-item text-white">
+          <label class="switch">
+          <input type="checkbox" id="toggleDarkMode">
+          <span class="slider"></span>
+          </label>
+          <span class="label-text">Modo Oscuro</span>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="datos">
-    <div class="profileImg">
-    </div>
-    <div >
-    <label>Nombre</label>
-    <p>Nombre</p>
-    </div>
-    <div>
-    <label>Apellido</label>
-    <p>Apellido</p>
-    </div>
-    <div>
-    <label>Dirección de correo</label>
-    <p>Dirección de correo</p>
+    <div id="fondo">
+ <div class="container" id="TuPerfil">
+      <h2>Tu perfil</h2>
+      
+
+  <form id="perfilForm">
+    <div class="profile-pic">
+       <div id="icono">👤</div> <input type="file" id="perfil-img" accept="image/*">
+      <label class="upload-icon" for="perfil-img"><span class="material-icons">upload</span></label>
+     
+     
     </div>
     <div>
-    <label>Teléfono</label>
-    <p>Teléfono</p>
+      <input type="text" id="nombre" placeholder="Nombre">
+      <input type="text" id="apellido" placeholder="Apellido">
     </div>
+    <div>
+      <input type="email" id="email" placeholder="Dirección de correo">
+      <input type="tel" id="telefono" placeholder="Teléfono">
+    </div>
+    <div>
+      <button type="submit" id="guardar">Guardar</button>
+      <button type="button" class="cancelar" id="cancelar">Cancelar</button>
+    </div>
+  </form>
+
+  <a href="index.html" class=" text-dark fs-6" id="volverInicio">Volver al inicio</a>
 </div>
+
+
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -64,10 +84,14 @@
       </p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
+
+    </div>
   </footer>
+  
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/my-profile.js"></script>
+  <script src="js/my-profile.js" type="module"></script>
+</div>
 </body>
 
 </html>
