@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/products.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="userName" href=""></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+ 
+     <div class="buscador">
+      <input type="search" placeholder="Buscar productos..." id="buscador">
+      <button id="lupa" style="cursor:not-allowed;">🔍</button>
+    </div>
+
+    <div class="orden">
+      
+      <button class="btn-orden">↑<span class="material-icons filtro" style="font-size: small;" id="asc" >sort</span>$</button>
+      <button class="btn-orden">↓<span class="material-icons filtro" style="font-size: small;" id="desc" >sort</span>$</button>
+      <button class="btn-orden">↓<span class="material-icons filtro" style="font-size: small;" id="rel">sort</span>Rel</button>
+      <i class="fa-solid fa-house"></i>
+    </div>
+    <div class="filtros"> 
+      <label id="precio" for="rango">Precio</label>
+      <input type="number" id="min" placeholder="mínimo">
+      <input type="number" id="max" placeholder="máximo">
+      <button id="filtrar" class="btn-orden mt-2" style="background-color: rgb(245, 191, 122);">Filtrar</button>
+      <button id="limpiar" class="btn-orden" style="color: blue;">Limpiar</button> 
+      <p id="aviso" style="color: red; margin-right: 20px;"></p>
+    </div>
+  </main>
+    <!--tabla de bootstrap-->
+<div class="table">
+<table class="table table-hover table-borderless">
+  <thead id="table">
+    <tr class="productos">
+      <th scope="col" class="products"><span>Productos</span></th>
+      <th scope="col"class="description"><span>Descripción</span></th>
+      <th scope="col" class="sold"><span>Vendidos</span></th>
+      <th scope="col" class="price"><span>Precio</span></th>
+    </tr>
+  </thead>
+  <tbody id="products-list">
+  </tbody>
+</table>
+</div>
+
+  <footer class="text-muted">
+    <div class="container">
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <!--lo mismo que antes, lo cambié para el final y al centro-->
+      <p class="text-center">
+        <a href="#">Volver arriba</a>
+      </p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script type= "module" src="js/products.js"></script>
+</body>
+
+</html>
