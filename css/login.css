@@ -1,0 +1,170 @@
+
+#loginForm{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height:380px;
+    margin: auto;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    background-image:linear-gradient(140deg, #387D9F,#1C546F,#001d2c);
+    box-shadow: 7px 7px 0px rgba(0, 0, 0, 0.300);
+    justify-content: center;
+    align-items:center;
+}
+
+#loginForm h1{
+text-align:center;
+font-size:40px;
+font-weight:bold;
+color:white;
+text-shadow:2px 2px 0 rgba(0, 0, 0, 0.274);
+}
+
+label.txtInput {
+    font-weight:bold;
+    align-self: flex-start;
+    margin:20px 0 5px 5px;
+    color:rgb(255, 255, 255);
+    text-shadow:1px 1px 0 rgba(0, 0, 0, 0.300);
+    margin-bottom: 5px;
+}
+
+input#clave{
+    border: none;
+    outline:none;
+    width:350px;
+    padding-left:10px;
+    padding-bottom:5px;
+    font-size:20px;
+    background-color:transparent;
+}
+
+input#email{
+    border-radius:10px;
+    border: none;
+    outline:none;
+    width:350px;
+    padding-left:10px;
+    padding-bottom:5px;
+    font-size:20px;
+    box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.300);
+}
+
+input#email::placeholder, input#clave::placeholder {
+    opacity: 0.5;
+}
+
+.form-check-label {
+    display: inline-block;
+    justify-content: left;
+    font-size: medium;
+    color:rgb(255, 255, 255);
+    text-shadow:1px 1px 0 rgba(0, 0, 0, 0.300);
+}
+
+.form-check{
+    align-self:flex-start;
+    margin:20px 0 5px 5px;
+}
+
+
+.password-container{
+    display:flex;
+    align-items:center;
+    background-color:white;
+    box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.300);
+    border-radius:10px;
+    width:350px;
+}
+
+#togglePassword {
+font-size:30px;
+padding-right:5px;
+color:rgba(0, 0, 0, 0.300);
+cursor: pointer;
+
+}
+
+button {
+    padding-bottom:5px;
+    background-color: #f57e0e;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width:140px;
+    height:40px;
+    align-self:flex-end;
+    font-weight:bold;
+    box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.300);
+    font-size: 20px;
+    margin:20px 5px 0px 0px;
+}
+
+@media screen and (min-width:320px){
+    body{
+        background-color: #1C546F;
+        background-image:url(/img/grupo-4.png);
+    }
+    footer{
+        background-color: rgb(252, 252, 252);
+        background-size: 100px;
+        width: 100%;
+        display: flexbox;
+        flex-wrap: wrap;
+        margin-top: 15px;
+
+    }
+
+    /*celulares chicos (mínimo 320px) */
+@media screen and (min-width:320px) and (max-width: 480px) {
+  #loginForm {
+    width: 90%;   /*en lugar medidas absolutas */
+    height: auto; /*que crezca según el contenido*/
+    padding: 15px;
+  }
+
+  input#email,
+  input#clave,
+  .password-container {
+    width: 100%;  /* que se adapte al ancho del form*/
+  }
+
+  button {
+    align-self: center; /*centrar el botón en cel*/
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/*tablets (mínimo 768px) */
+@media screen and (min-width: 768px) and (max-width: 1365px) {
+  #loginForm {
+    width: 70%; /*más ancho que en cel, pero no fijo*/
+  }
+
+  input#email,
+  input#clave,
+  .password-container {
+    width: 100%;
+  }
+}
+
+/*estándar (mínimo 1366px) */
+@media screen and (min-width: 1366px) {
+  #loginForm {
+    width: 400px;  /*vuelve al tamaño original*/
+    height: 380px;
+  }
+
+  input#email,
+  input#clave,
+  .password-container {
+    width: 350px; /*vuelve al tamaño original*/
+  }
+}
+
+}
+

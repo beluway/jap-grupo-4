@@ -1,0 +1,268 @@
+.container {
+    margin-top: 3%;
+    align-items: baseline;
+}
+
+#imagenes img {
+ width: 95%;
+ height: auto;
+ margin:0 !important;
+ }
+
+#imagenes {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
+#volverListado{
+    display: flex !important;
+    text-align: center !important;
+    margin-left: 40% !important;
+}
+
+#datos { 
+    font-size: larger !important;
+    align-items: center;
+}
+
+/*Seccion de comentarios*/
+section.comments {
+    display : flex;
+    flex-direction: column;
+    align-items:flex-end;
+    margin-right: 5%;
+}
+section.comments h3 {
+    margin-right: 10px;
+}
+div#comentarios {
+    border-top: 2px solid orange;
+    border-bottom:2px solid orange;
+    max-width:70%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+div.userRating {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 2%;
+}
+span.userInfo {
+    font-weight:bold;
+}
+span#dateTime {
+    font-weight: normal;
+    opacity: 0.5;
+}
+span.userStars {
+white-space: nowrap;
+}
+/*Agregar comentario*/
+.add-comment {
+  max-width: 650px;
+  font-family: Arial, sans-serif;
+}
+
+.add-comment h3 {
+    display: flex;
+    justify-content: right;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+/* Usamos grid para dos columnas */
+#send-comment {
+  display: grid;
+  grid-template-columns: 100px 1fr; /* izquierda fija, derecha flexible */
+  gap: 15px;
+}
+
+/* Columna izquierda en vertical */
+#send-comment label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra vertical respecto al textarea */
+  align-items: flex-start;
+}
+
+#rate {
+  display: block;
+  margin-bottom: 10px;
+  padding: 4px;
+  width: 60px;
+}
+
+/* Botón naranja */
+#send {
+  display: block;
+  background-color: #ff9933;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+#send:hover {
+  background-color: #e68a00;
+}
+
+/* Textarea derecha */
+#area-comment {
+  min-width: 280px; /* aseguramos que quede grande */
+  min-height: 120%;
+  padding: 8px;
+  font-size: 14px;
+  
+}
+#comentarios-relacionados {
+    display: flex;
+    align-items: flex-start;
+    gap: 5%;
+}
+
+
+@media screen and (min-width: 1200px) {
+    #related-container, .comments {
+        justify-items: center !important;
+        gap: 10%;
+    }
+
+    #productos-relacionados {
+        margin-left: 10%;
+    }
+    #volverListado{
+        margin-top: 3%;
+    }
+
+
+}
+
+@media screen and (min-width: 400px) and (max-width: 800px) {
+    #imagenes {
+        grid-template-columns: repeat(2, 1fr) !important;
+        row-gap: 4% !important;
+    }
+    #datos{
+        display: flex;
+        align-items: center;
+        font-size: medium !important;
+        margin-top: 0% !important;
+        align-items: center !important;
+    }
+    #descripcion {
+        font-size: medium !important;
+        margin-left: 2%;
+        margin-right: 2% !important;
+    }
+    .btn {
+        font-size: small !important;
+    }
+    .form-control {
+        max-width: 96% !important;
+    }   
+
+    .add-comment {
+        margin-top: 3%;
+    }
+    
+    section.comments {
+    display : flex;
+    flex-direction: column;
+    align-items:center !important;
+    margin-right: 5%;}
+   
+    #productos-relacionados {
+        display:flex;
+        flex-direction: column;
+        align-items: flex-start;
+       margin-left: 8%;
+    }
+    #comentarios-relacionados {
+        margin-top: -5% !important;
+    }
+
+
+    #volverListado{
+        margin-top: 7%;
+    }
+    
+}
+
+@media screen and (max-width: 400px ) {
+    #imagenes {
+        grid-template-columns: repeat(2, 1fr) !important;
+        row-gap: 4% !important;
+    }
+    #titulos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #datos{
+        display: flex;
+        align-items: center;
+        font-size: small !important;
+        margin-top: 0% !important;
+        align-items: center !important;
+    }
+    #comprar{
+    font-size: small !important;
+    }
+
+    #comentarios-relacionados {
+        display: flex;
+        flex-direction: column;
+        align-items: center !important;
+        gap: 5%;
+    }
+
+    #productos-relacionados {
+        display:flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        margin-left: 15%;
+       
+    }
+    section.comments {
+    display : flex;
+    flex-direction: column;
+    align-items:center !important;
+    margin-right: 5%;
+}
+#send-comment {
+    display: flex;
+    flex-direction: column;  
+    margin-top: 5%;
+}
+
+.right-column, 
+  .left-column {
+    width: 100%;
+}
+.right-column {
+    order:1;
+}
+
+.left-column {
+    order:2;
+    align-items: center;
+}
+
+#volverListado{
+        margin-top: 5%;
+        align-items: center;
+}
+}

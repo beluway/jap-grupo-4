@@ -1,0 +1,213 @@
+
+ 
+.buscador button {
+  background-color: rgb(224, 169, 68);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+}
+.buscador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+      
+}
+
+.buscador input {
+  padding: 5px 10px;
+  border-radius: 100px;
+  border: 1px solid #aaa;
+  font-size: 16px;
+  background-color:  rgb(224, 169, 68);
+  width: 40%;
+  align-items: center;
+}
+
+.orden {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: bolder;
+  cursor: pointer; 
+  font-size: small;
+  margin-right: 15%;
+  margin-top: 1%;
+  gap: 1%;
+}
+
+.filtros {
+  display: flex;
+  justify-items: flex-end;
+  font-size: small;
+  margin-left: 58%;
+  margin-top: 1%;
+  gap: 1%;
+}
+
+.btn-orden {
+  border: none;
+
+}
+.encabezado {
+
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-bottom: 1px solid  rgb(224, 169, 68);
+}
+
+
+.titulo {
+  background-color: orange;
+}
+
+
+
+div.table{
+  display: flex;
+  justify-content: center;
+}
+table{
+  margin-top:2rem;
+  width:100%;
+  max-width: 1366px;
+}
+thead{
+  border-bottom:none;
+}
+tbody{
+  border-top: rgb(224, 169, 68) 5px solid;
+}
+tr.productos{
+  border:0;
+}
+th span{
+  background-color: rgb(224, 169, 68);
+  padding: 6px 12px 6px 12px; /* less bottom padding */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: inline-block;
+  line-height: 1;
+  margin: 0;
+}
+th.sold{
+  width:72px;
+}
+th.price{
+  width:94px;
+}
+td{
+  text-align: center;
+}
+td.name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight:bold;
+  font-size:20px;
+}
+img{
+  width:80%;
+  max-width:385px;
+  min-width:200px;
+}
+td.price, td.sold{
+  vertical-align: middle;
+}
+td.description{
+  vertical-align: middle;
+  text-align:left;
+  width: 269px;
+}
+.productos th{
+text-align: center;
+padding:0;
+}
+th.products{
+  width: 25vw;
+  max-width:577px;
+}
+table:hover{
+  cursor: pointer!important;
+}
+
+
+@media screen and (min-width:1366px){
+  td.name{
+  font-size:24px;
+  }
+  img{
+    width:100%;
+    max-width:385px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width:1366px){
+  .filtros {
+    display: block;
+    
+  }
+  #precio{
+    display: flex;
+    margin-right: 88%;
+  }
+}
+
+@media screen and (max-width:700px){
+  .buscador input{
+    width:80%;
+  }
+
+  th.description, th.sold, th.price{
+    display:none;
+    width:100%;
+  }
+  tbody{
+    display:block;
+    width:100%;
+  }
+  td{
+    display:block;
+    width:100vw;
+  }
+  td.name{
+    font-size:16px;
+  }
+  td.description{
+    display:flex;
+    width:100%;
+    justify-content: center;
+    text-align:center;
+  }
+  .description span{
+    max-width:300px;
+  }
+  td.sold::before{
+    content:"Vendidos: ";
+  }
+  .filtros {
+    display: block;
+    margin-left: 0;
+  }
+  #filtrar {
+    margin-left: 67%;
+  }
+  #precio {
+    display: flex;
+    justify-content: center;
+    margin-right: 88%;
+  }
+    td.name{
+    font-size:16px;
+  }
+  img{
+    width:80%;
+    max-width:300px;
+  }
+}
+
+.oculto {
+  display: none;
+}
