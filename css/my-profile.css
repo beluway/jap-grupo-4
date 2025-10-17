@@ -1,15 +1,21 @@
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
     background-color: #f9f9f9;
   }
-
-  #TuPerfil {
+#titulo {
+  margin-bottom: 5%;
+  font-weight: bold;
+}
+#TuPerfil {
     max-width: 600px;
-    margin: 40px auto;
+    margin: 3% auto 10% auto;
     text-align: center;
   }
-
-    .profile-pic {
+#icono {
+  border-radius: 50%;
+}
+.profile-pic {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -62,9 +68,6 @@ body {
     margin: 2%
   }
 
-    button:hover {
-    background-color: #e69500;
-  }
 
     .cancelar {
     margin-left: 5%;
@@ -78,8 +81,13 @@ body {
   input[type="file"]{
     display:none;
   }
+#perfilForm {
+  background-color: #f0f0f0d7;
+  border: 1px solid rgb(72, 69, 69);
+  border-radius: 4px ;
+}
 
-  #volverInicio {
-    margin-top: 10%;
-  }
-
+#volverInicio {
+  display: block;
+  margin-top: 5%;
+}

@@ -203,6 +203,10 @@ body.dark-mode {
   color: white;
 }
 
+#profile.profile-pic {
+  background-color:  white;
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -210,7 +214,13 @@ body.dark-mode {
   height: 17px;
   margin-top: 12px;
 }
+.dark-mode #icono {
+  background-color: #222; 
+}
 
+body.dark-mode #icono {
+  background-color: #1e1e1e; /* color del fondo del div en dark mode */
+}
 .switch input {
   opacity: 0;
   width: 0;

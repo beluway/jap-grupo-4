@@ -43,6 +43,7 @@ div#comentarios {
     max-width:70%;
     padding-right: 10px;
     padding-left: 10px;
+    
 }
 div.userRating {
     display: flex;
@@ -178,12 +179,15 @@ white-space: nowrap;
     }
     
     section.comments {
-    display : flex;
+    display: flex;
     flex-direction: column;
-    align-items:center !important;
-    margin-right: 5%;}
-   
-    #productos-relacionados {
+    align-items: flex-start; 
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#productos-relacionados {
         display:flex;
         flex-direction: column;
         align-items: flex-start;
@@ -198,6 +202,9 @@ white-space: nowrap;
         margin-top: 7%;
     }
     
+    #left-column{
+        align-items: left;
+    }
 }
 
 @media screen and (max-width: 400px ) {
