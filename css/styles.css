@@ -34,12 +34,13 @@ nav a {
   margin-bottom: 0;
   background-color: #53C0FB;
   background: url('../img/cover_back.png');
-  background-size:cover;
+  background-size: 30px;
   background-position: center;
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
 }
+
 
 @media (min-width: 768px) {
   .jumbotron {
@@ -304,6 +305,13 @@ input:checked + .slider:before {
 }
 #fondo.dark-mode,#fondo.text-muted,#fondo.dark-mode.btn{
   background-color: black !important;
+}
+
+#jumbotron.dark-mode {
+  background: url('../img/fondo-negro.png') center center no-repeat !important;
+  background-size: cover;   /* 👈 también aquí */
+  background-color: #000; /* 👈 opcional, fondo oscuro para bordes */
+  background-position: center;
 }
 
 @media screen and (min-width:300px) and (max-width: 600px){

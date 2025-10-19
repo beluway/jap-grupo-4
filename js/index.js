@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Modo Oscuro
 const chkOscuro = document.getElementById('toggleDarkMode');
 const divFondo = document.getElementById('fondo');
+const jumbotron = document.getElementById('jumbotron');
 
 
     // Aplicar preferencia al cargar la página
@@ -42,5 +43,6 @@ window.addEventListener('load', () => {
 // Cambiar modo oscuro y guardar preferencia
 chkOscuro.addEventListener('change', () => {
   divFondo.classList.toggle("dark-mode", chkOscuro.checked);
+  jumbotron.classList.toggle("dark-mode", chkOscuro.checked);
   localStorage.setItem('modoOscuro', chkOscuro.checked);
 });
