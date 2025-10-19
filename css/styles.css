@@ -28,13 +28,26 @@ nav a {
   }
 }
 
-.jumbotron {
+/* .jumbotron {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
   background-color: #53C0FB;
   background: url('../img/cover_back.png');
   background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
+} */
+
+.jumbotron {
+  height: 50vh;
+  padding: 5em inherit;
+  margin-bottom: 0;
+  background-color: #53C0FB;
+  background: url('../img/cover_back.png');
+  background-size:cover;
   background-position: center;
   background-repeat: no-repeat;
   color: black;
