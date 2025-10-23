@@ -13,6 +13,24 @@ nav a {
   text-decoration: none;
 }
 
+/* carrito */
+material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24,
+}
+#shopping_cart{
+  margin-top: 10px!important;
+}
+
+#carrito{
+  color: orange;
+  
+}
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;

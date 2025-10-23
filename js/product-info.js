@@ -192,4 +192,11 @@ chkOscuro.addEventListener('change', () => {
   localStorage.setItem('modoOscuro', chkOscuro.checked);
 });
 
+//SECCIÓN COMPRAR QUE DERIVA A LA PANTALLA DEL CARRITO
+const btnComprar = document.getElementById('comprar');
+
+btnComprar.addEventListener("click",()=>{
+window.location = "cart.html"
+});
+
 
