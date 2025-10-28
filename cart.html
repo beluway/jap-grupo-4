@@ -9,6 +9,8 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/cart.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -44,9 +46,36 @@
     </div>
   </nav>
   <main>
+    <h3>Tu carrito</h3>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="carrito">
+        <div class="producto">
+          <img src="producto" alt="Producto" />
+          <p>Nombre</p>
+          <div class="unidades">
+            <button class="menos">-</button>
+            <input type="number" class="cantidad" value="1" min="1"/>
+            <button class="más">+</button>
+          </div>
+          <span>subtotal</span>
+        </div>
+        <div class="producto">
+          <img src="producto" alt="Producto" />
+          <p>Nombre</p>
+          <div class="unidades">
+            <button class="menos">-</button>
+            <input type="number" class="cantidad" value="1" min="1"/>
+            <button class="más">+</button>
+          </div>
+          <span>subtotal</span>
+        </div>
+      </div>
+      <div class="total">
+        <ul>
+          <li><h4>Total</h4></li>
+          <li class="precio">$precio</li>
+          <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">comprar</button></li>
+        </ul>
       </div>
     </div>
   </main>
