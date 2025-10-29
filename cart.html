@@ -46,17 +46,41 @@
     </div>
   </nav>
   <main>
-   <h1>Tu carrito</h1>
-   <div class="container">
-      <div class="carrito"> <!--Insertar productos del localStorage-->
-
+    <h3>Tu carrito</h3>
+    <div class="container">
+      <div class="carrito" id="productoCarrito">
+        <div class="producto" >
+          <img src="producto" alt="Producto" id="imagenProducto"/>
+          <div>
+            <p>Nombre</p>
+            <p id="nombre"></p>
+          </div>
+          
+          <div class="unidades">
+            <button class="menos">-</button>
+            <input type="number" class="cantidad" value="1" min="1" id="cantidadProducto"/>
+            <button class="más">+</button>
+          </div>
+          <span>subtotal</span>
+          <p id="precio"></p>
+        </div>
+        <div class="producto">
+          <img src="producto" alt="Producto" id="imagenProducto"/>
+          <p>Nombre</p>
+          <div class="unidades">
+            <button class="menos">-</button>
+            <input type="number" class="cantidad" value="1" min="1"/>
+            <button class="más">+</button>
+          </div>
+          <span>subtotal</span>
+        </div>
       </div>
       <div class="total">
-          <h4>Total</h4>
-          <div class="suma"></div>
-          <div class="comprar">
-            <input type="button" id="btn-comprar" value="Comprar"/>
-          </div>
+        <ul>
+          <li><h4>Total</h4></li>
+          <li class="precio">$precio</li>
+          <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">comprar</button></li>
+        </ul>
       </div>
     </div>
   </main>

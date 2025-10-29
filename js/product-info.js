@@ -196,7 +196,9 @@ chkOscuro.addEventListener('change', () => {
 const btnComprar = document.getElementById('comprar');
 
 btnComprar.addEventListener("click",()=>{
+  
 window.location = "cart.html"
 });
+
 
 
