@@ -532,3 +532,7 @@ body.dark-mode .cart-count,
 #fondo.dark-mode .cart-count {
   background-color: orange !important;
 }
+
+#cerrar{
+  cursor: pointer;
+}

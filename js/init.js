@@ -49,3 +49,10 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     }
   });
+
+    //Cerrar sesión
+const cerrarSesion = document.getElementById('cerrar');
+cerrarSesion.addEventListener('click', () => {
+    localStorage.clear();
+    window.location = "login.html";
+});
