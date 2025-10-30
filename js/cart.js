@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnComprar = document.getElementById("btn-comprar");
   if (btnComprar) {
     btnComprar.addEventListener("click", () => {
-      alert("✅ ¡Gracias por tu compra!");
+      alert("¡Gracias por tu compra!");
       carrito = [];
       localStorage.setItem("carrito", JSON.stringify([]));
       renderizarCarrito();
