@@ -1,6 +1,7 @@
 h3{
     text-align: center;
-    margin:20px 0 20px 0;
+    margin:0px 0 20px 0;
+    padding-top: 20px;
 }
 
 div.container{
@@ -88,4 +89,20 @@ li{
 }
 #btn-comprar:focus{
     box-shadow: none;
+}
+footer .container{
+    display:flex;
+    justify-content: space-between;
+}
+
+@media (max-width:600px){
+    div.container{
+        flex-direction: column;
+        align-items: center;
+    }
+    div.producto{
+        flex-direction: column;
+        align-items: center;
+        width:300px;
+    }
 }

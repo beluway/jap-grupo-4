@@ -45,13 +45,14 @@
       </div>
     </div>
   </nav>
-  <main>
+  <div id="fondo">
+    <main>
     <h3>Tu carrito</h3>
     <div class="container">
       <div class="carrito" id="productoCarrito">
         <div class="producto" >
           <img src="producto" alt="Producto" id="imagenProducto"/>
-          <div>
+          <div class="nombre-producto">
             <p>Nombre</p>
             <p id="nombre"></p>
           </div>
@@ -83,15 +84,16 @@
         </ul>
       </div>
     </div>
-  </main>
-  <footer class="text-muted">
+    </main>
+    <footer class="text-muted">
     <div class="container">
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
-  </footer>
+    </footer>
+  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -102,7 +104,7 @@
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+  <script src="js/cart.js" type="module"></script>
 </body>
 
 </html>

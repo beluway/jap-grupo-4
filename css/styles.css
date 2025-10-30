@@ -344,6 +344,27 @@ input:checked + .slider:before {
   background-color: #000; /* 👈 opcional, fondo oscuro para bordes */
   background-position: center;
 }
+/*modo oscuro de cart.html*/
+#fondo.dark-mode div.producto{
+    background-color: rgb(75, 75, 75) !important;
+}
+#fondo.dark-mode div.unidades{
+  background-color: transparent !important;
+}
+#fondo.dark-mode input.cantidad{
+background-color: transparent;
+border:none;
+}
+#fondo.dark-mode div.nombre-producto{
+  background-color: transparent !important;
+}
+#fondo.dark-mode div.total{
+background-color: rgb(75, 75, 75) !important;
+}
+#fondo.dark-mode li.precio{
+  border-bottom:1px solid rgba(255, 255, 255, 0.50);
+  border-top:1px solid rgb(255, 255, 255, 0.50);
+}
 
 @media screen and (min-width:300px) and (max-width: 600px){
   .jumbotron{
