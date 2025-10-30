@@ -14,30 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const usuario = getUsuario();
 const userNameElement = document.getElementById("userName");
 userNameElement.textContent = usuario.email;
-
- //función para cargar la info del producto seleccionado
-  getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
-    .then(resultObj => {
-      if (resultObj.status === "ok") {
-        const product = resultObj.data;
-        const galeria = document.getElementById("imagenes");
-        
-        document.getElementById("nombre").innerText = product.name;
-        document.getElementById("descripcion").innerText = product.description;
-        document.getElementById("precio").innerText = `Precio: ${product.currency} ${product.cost}`;
-        document.getElementById("ventas").innerText = `Cantidad de vendidos: ${product.soldCount}`;
-        document.getElementById("categoria").innerText = `Categoría: ${product.category}`;  
-      
-        product.images.forEach(imgUrl => {
-          const img = document.createElement("div");
-          img.innerHTML = `<img src="${imgUrl}" class="img-fluid">`;
-          galeria.appendChild(img);
-        });
-
-        //llamo a función que muestra los related products de ese mismo producto
-        mostrarProductosRelacionados(product.relatedProducts);
-      }
-    });
   
 //-------------SECCIÓN DE COMENTARIOS-------------
 
@@ -211,10 +187,10 @@ getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
         galeria.appendChild(img);
       });
 
-      // 🔹 Llamo a la función que muestra los productos relacionados
+      // Llamo a la función que muestra los productos relacionados
       mostrarProductosRelacionados(product.relatedProducts);
 
-      // 🔹 SECCIÓN COMPRAR: debe ir AQUÍ dentro, para tener acceso a "product"
+      //  SECCIÓN COMPRAR: debe ir AQUÍ dentro, para tener acceso a "product"
       const btnComprar = document.getElementById('comprar');
 
       if (btnComprar) {

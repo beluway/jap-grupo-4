@@ -110,3 +110,15 @@ if (localStorage.getItem('modoOscuro') === 'true') {
   chkOscuro.checked = true;
   divFondo.classList.add('dark-mode');
 }
+
+//traemos el nombre de usuario para ponerlo en el navbar
+import { getUsuario } from "./clases/Usuario.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const usuario = getUsuario();
+  const userNameElement = document.getElementById("userName");
+
+  if (usuario && userNameElement) {
+    userNameElement.textContent = usuario.email;
+  }
+});
