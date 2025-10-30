@@ -1,60 +1,112 @@
-import { getUsuario } from "./clases/Usuario.js";
+const chkOscuro = document.getElementById("toggleDarkMode");
 
-document.addEventListener("DOMContentLoaded", function () { 
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedorCarrito = document.getElementById("productoCarrito");
+  const totalElement = document.querySelector(".total .precio");
 
-    const usuario = getUsuario();
-    const userNameElement = document.getElementById('userName');
-    userNameElement.textContent = usuario.email;
+  // Recuperar el carrito desde localStorage
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  // Función para renderizar los productos
+  function renderizarCarrito() {
+    contenedorCarrito.innerHTML = ""; // Limpiar contenido previo
+    let total = 0;
+
+    if (carrito.length === 0) {
+      contenedorCarrito.innerHTML = "<p>Tu carrito está vacío 🛒</p>";
+      totalElement.textContent = "$0";
+      return;
+    }
+
+    carrito.forEach((producto, index) => {
+      const subtotal = producto.precio * producto.cantidad;
+      total += subtotal;
+
+      const itemHTML = `
+        <div class="producto d-flex align-items-center justify-content-between border-bottom py-2">
+          <div class="d-flex align-items-center gap-3">
+            <img src="${producto.imagen || 'img/default.png'}" alt="${producto.nombre}" width="80" height="80" class="rounded">
+            <div>
+              <h5 class="mb-1">${producto.nombre}</h5>
+              <p class="mb-0 text-muted">$${producto.precio}</p>
+            </div>
+          </div>
+
+          <div class="unidades d-flex align-items-center gap-2">
+            <button class="menos btn btn-sm btn-outline-secondary" data-index="${index}">−</button>
+            <input type="number" class="cantidad form-control text-center" value="${producto.cantidad}" min="1" data-index="${index}" style="width: 60px;">
+            <button class="mas btn btn-sm btn-outline-secondary" data-index="${index}">+</button>
+          </div>
+
+          <p class="mb-0 fw-bold">$${subtotal.toFixed(2)}</p>
+        </div>
+      `;
+
+      contenedorCarrito.insertAdjacentHTML("beforeend", itemHTML);
     });
 
-    //guardar cantidad, datos del producto
+    totalElement.textContent = `$${total.toFixed(2)}`;
+  }
 
-    //Guardamos en el local storage los id de los que agregué
-    const productID = localStorage.getItem('productID');
-    //Cuando estamos en el carrito hacemos un fetch a cada producto que agregamos, por id
-getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
-    .then(resultObj => {
-      if (resultObj.status === "ok") {
-        const product = resultObj.data;
-        const galeria = document.getElementById("imagenes");
-        
-        document.getElementById("nombre").innerText = product.name;
-        document.getElementById("precio").innerText = `Precio: ${product.currency} ${product.cost}`;
-        product.images.forEach(imgUrl => {
-          const img = document.getElementById('imagenProducto');
-          img.innerHTML = `<img src="${imgUrl}" class="img-fluid">`;
-          galeria.appendChild(img);
-        });
-        
-        //llamo a función que muestra los related products de ese mismo producto
-        mostrarProductosRelacionados(product.relatedProducts);
+  // Escuchar clicks en botones + y −
+  contenedorCarrito.addEventListener("click", (e) => {
+    if (e.target.classList.contains("mas")) {
+      const index = e.target.dataset.index;
+      carrito[index].cantidad++;
+    } else if (e.target.classList.contains("menos")) {
+      const index = e.target.dataset.index;
+      if (carrito[index].cantidad > 1) {
+        carrito[index].cantidad--;
+      } else {
+        carrito.splice(index, 1);
       }
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    renderizarCarrito();
+
+    if (window.actualizarContadorCarrito) {
+      window.actualizarContadorCarrito();
+    }
+  });
+
+  // Detectar cambios en los inputs de cantidad
+  contenedorCarrito.addEventListener("input", (e) => {
+    if (e.target.classList.contains("cantidad")) {
+      const index = e.target.dataset.index;
+      const nuevaCantidad = parseInt(e.target.value);
+      if (nuevaCantidad > 0) carrito[index].cantidad = nuevaCantidad;
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      renderizarCarrito();
+      window.actualizarContadorCarrito?.();
+    }
+  });
+
+  // Render inicial
+  renderizarCarrito();
+
+  // Botón de "comprar"
+  const btnComprar = document.getElementById("btn-comprar");
+  if (btnComprar) {
+    btnComprar.addEventListener("click", () => {
+      alert("✅ ¡Gracias por tu compra!");
+      carrito = [];
+      localStorage.setItem("carrito", JSON.stringify([]));
+      renderizarCarrito();
+      window.actualizarContadorCarrito?.();
     });
-    //guardo el id, la moneda, ya guardo toda la info en el LocalStorage
-    //llenamos un array con la información de los objetos
-    //cuando le damos a comprar más de una vez, que se actualice la cantidad de ese producto
-
-    //localStorage .clear del username para cerrar sesión
-
-
-//Para poner el modo oscuro
-const chkOscuro = document.getElementById('toggleDarkMode');
-const divFondo = document.getElementById('fondo');
-
-// Aplicar preferencia al cargar la página
-window.addEventListener('load', () => {
-  const modo = localStorage.getItem('modoOscuro');
-  if (modo === "true") {
-    divFondo.classList.add("dark-mode");
-    chkOscuro.checked = true;
-  } else {
-    divFondo.classList.remove("dark-mode");
-    chkOscuro.checked = false;
   }
 });
+
+const divFondo = document.getElementById("fondo");
 
 // Cambiar modo oscuro y guardar preferencia
 chkOscuro.addEventListener('change', () => {
   divFondo.classList.toggle("dark-mode", chkOscuro.checked);
   localStorage.setItem('modoOscuro', chkOscuro.checked);
 });
+
+if (localStorage.getItem('modoOscuro') === 'true') {
+  chkOscuro.checked = true;
+  divFondo.classList.add('dark-mode');
+}

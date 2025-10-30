@@ -193,12 +193,58 @@ chkOscuro.addEventListener('change', () => {
 });
 
 //SECCIÓN COMPRAR QUE DERIVA A LA PANTALLA DEL CARRITO
-const btnComprar = document.getElementById('comprar');
+getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
+  .then(resultObj => {
+    if (resultObj.status === "ok") {
+      const product = resultObj.data;
+      const galeria = document.getElementById("imagenes");
+      
+      document.getElementById("nombre").innerText = product.name;
+      document.getElementById("descripcion").innerText = product.description;
+      document.getElementById("precio").innerText = `Precio: ${product.currency} ${product.cost}`;
+      document.getElementById("ventas").innerText = `Cantidad de vendidos: ${product.soldCount}`;
+      document.getElementById("categoria").innerText = `Categoría: ${product.category}`;  
 
-btnComprar.addEventListener("click",()=>{
-  
-window.location = "cart.html"
-});
+      product.images.forEach(imgUrl => {
+        const img = document.createElement("div");
+        img.innerHTML = `<img src="${imgUrl}" class="img-fluid">`;
+        galeria.appendChild(img);
+      });
 
+      // 🔹 Llamo a la función que muestra los productos relacionados
+      mostrarProductosRelacionados(product.relatedProducts);
 
+      // 🔹 SECCIÓN COMPRAR: debe ir AQUÍ dentro, para tener acceso a "product"
+      const btnComprar = document.getElementById('comprar');
 
+      if (btnComprar) {
+        btnComprar.addEventListener("click", () => {
+          const producto = {
+            nombre: product.name,
+            precio: product.cost,
+            imagen: product.images[0] || "img/default.png",
+            cantidad: 1,
+            moneda: product.currency
+          };
+
+          // Recuperar el carrito actual (si existe)
+          let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+          // Buscar si el producto ya está en el carrito
+          const existente = carrito.find(item => item.nombre === producto.nombre);
+
+          if (existente) {
+            existente.cantidad++;
+          } else {
+            carrito.push(producto);
+          }
+
+          // Guardar el carrito actualizado
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+
+          // Redirigir al carrito
+          window.location.href = "cart.html";
+        });
+      }
+    }
+  });
