@@ -528,6 +528,12 @@ background-color: rgb(75, 75, 75) !important;
   line-height: 1;
 }
 
+.modal-envio{
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
 body.dark-mode .cart-count,
 #fondo.dark-mode .cart-count {
   background-color: orange !important;

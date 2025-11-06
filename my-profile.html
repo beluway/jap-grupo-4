@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,98 +9,138 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/my-profile.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
 </head>
 
 <body>
   <div id="fondo">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="cerrar">Cerrar sesión</a>
-          </li>
-          <li>
-             <a href="cart.html" id="carrito" class="position-relative">
-          <span class="material-symbols-outlined" id="shopping_cart">
-          shopping_cart
-         </span>
-         <span id="cart-count" class="cart-count">0</span>
-          </a>
-          </li>
-          <li class="nav-item text-white">
-          <label class="switch">
-          <input type="checkbox" id="toggleDarkMode">
-          <span class="slider"></span>
-          </label>
-          <span class="label-text">Modo Oscuro</span>
-          </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 justify-content-between">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sell.html">Vender</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="cerrar">Cerrar sesión</a>
+            </li>
+            <li>
+              <a href="cart.html" id="carrito" class="position-relative">
+                <span class="material-symbols-outlined" id="shopping_cart">
+                  shopping_cart
+                </span>
+                <span id="cart-count" class="cart-count">0</span>
+              </a>
+            </li>
+            <li class="nav-item text-white">
+              <label class="switch">
+                <input type="checkbox" id="toggleDarkMode">
+                <span class="slider"></span>
+              </label>
+              <span class="label-text">Modo Oscuro</span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <main>
-    <div id="fondo">
- <div class="container" id="TuPerfil">
-      <h2 id="titulo">Tu perfil</h2>
-      
+    </nav>
 
-  <form id="perfilForm">
-    <div class="profile-pic">
-       <div id="icono">👤</div> <input type="file" id="perfil-img" accept="image/*">
-      <label class="upload-icon" for="perfil-img"><span class="material-icons">upload</span></label>
-     
-     
-    </div>
-    <div>
-      <input type="text" id="nombre" placeholder="Nombre">
-      <input type="text" id="apellido" placeholder="Apellido">
-    </div>
-    <div>
-      <input type="email" id="email" placeholder="Dirección de correo">
-      <input type="tel" id="telefono" placeholder="Teléfono">
-    </div>
-    <div>
-      <button type="submit" id="guardar">Guardar</button>
-      <button type="button" class="cancelar" id="cancelar">Cancelar</button>
-    </div>
-  </form>
+    <main>
+      <div class="container" id="TuPerfil">
+        <h2 id="titulo">Tu perfil</h2>
 
-  <a href="index.html" class=" text-dark fs-6" id="volverInicio">Volver al inicio</a>
-</div>
+        <form id="perfilForm">
+          <div class="profile-pic">
+            <div id="icono">👤</div>
+            <input type="file" id="perfil-img" accept="image/*">
+            <label class="upload-icon" for="perfil-img">
+              <span class="material-icons">upload</span>
+            </label>
+          </div>
 
+          <div>
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="apellido" placeholder="Apellido">
+          </div>
+          <div>
+            <input type="email" id="email" placeholder="Dirección de correo">
+            <input type="tel" id="telefono" placeholder="Teléfono">
+          </div>
+          <div>
+            <button type="submit" id="guardar">Guardar</button>
+            <button type="button" class="cancelar" id="cancelar">Cancelar</button>
+          </div>
+        </form>
 
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
+        <!-- 💳 SECCIÓN BILLETERA -->
+        <hr>
+        <section id="billetera" class="container mt-4">
+          <h3>💳 Mi Billetera</h3>
 
-    </div>
-  </footer>
-  
+          <!-- Botón para agregar nueva tarjeta -->
+          <button class="btn btn-success my-3" id="btnNuevaTarjeta">Agregar nueva tarjeta</button>
+
+          <!-- Lista de tarjetas guardadas -->
+          <div id="listaTarjetas" class="row g-3"></div>
+
+          <!-- Modal para agregar tarjeta -->
+          <div class="modal fade" id="modalTarjeta" tabindex="-1" aria-labelledby="modalTarjetaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content p-3" style="border-radius: 15px;">
+                <h5 class="modal-title mb-3 text-center" id="modalTarjetaLabel">Agregar tarjeta</h5>
+                <div class="mb-3">
+                  <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
+                  <input type="text" id="numeroTarjeta" class="form-control" maxlength="16" placeholder="XXXX XXXX XXXX XXXX">
+                </div>
+                <div class="mb-3">
+                  <label for="nombreTarjeta" class="form-label">Nombre en la tarjeta</label>
+                  <input type="text" id="nombreTarjeta" class="form-control">
+                </div>
+                <div class="mb-3 d-flex gap-2">
+                  <div>
+                    <label for="vencimientoTarjeta" class="form-label">Vencimiento</label>
+                    <input type="month" id="vencimientoTarjeta" class="form-control">
+                  </div>
+                  <div>
+                    <label for="cvvTarjeta" class="form-label">CVV</label>
+                    <input type="password" id="cvvTarjeta" maxlength="3" class="form-control" placeholder="123">
+                  </div>
+                </div>
+                <div class="text-end">
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button class="btn btn-success" id="guardarTarjeta">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <a href="index.html" class="text-dark fs-6" id="volverInicio">Volver al inicio</a>
+      </div>
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-end"><a href="#">Volver arriba</a></p>
+        <p>Este sitio forma parte de 
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js" type="module"></script>
-   <script src="js/clases/cartCount.js"></script>
-</div>
+  <script src="js/clases/cartCount.js"></script>
 </body>
-
 </html>

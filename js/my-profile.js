@@ -1,4 +1,3 @@
-
 import { getUsuario } from "./clases/Usuario.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,10 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputImagen = document.querySelector("#perfil-img");
   const icono = document.querySelector("#icono");
 
-
   // --- Ocultamos el input de imagen ---
   inputImagen.style.display = "none";
-
 
   // --- Click en el ícono abre el selector de imagen ---
   icono.addEventListener("click", () => {
@@ -42,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- Mostrar email del usuario en el nav ---
-  userNameElement.textContent = usuario.email;
+  if (userNameElement) userNameElement.textContent = usuario.email;
 
   // --- Cargar perfil guardado (si existe) ---
   const datosPerfilGuardado = JSON.parse(localStorage.getItem("perfilUsuario"));
@@ -60,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- Guardar datos ---
+  // --- Guardar datos del perfil ---
   guardarBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -92,9 +89,98 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("perfilUsuario");
     icono.innerHTML = "👤"; // vuelve al ícono original
   });
+
+  // ----------------------------------------------------------------
+  // 💳 SECCIÓN BILLETERA
+  // ----------------------------------------------------------------
+
+  const btnNuevaTarjeta = document.getElementById("btnNuevaTarjeta");
+  const listaTarjetas = document.getElementById("listaTarjetas");
+  const guardarTarjetaBtn = document.getElementById("guardarTarjeta");
+
+  const numeroTarjeta = document.getElementById("numeroTarjeta");
+  const nombreTarjeta = document.getElementById("nombreTarjeta");
+  const vencimientoTarjeta = document.getElementById("vencimientoTarjeta");
+  const cvvTarjeta = document.getElementById("cvvTarjeta");
+
+  // --- Cargar tarjetas guardadas ---
+  function cargarTarjetas() {
+    listaTarjetas.innerHTML = "";
+    const tarjetas = JSON.parse(localStorage.getItem("tarjetas")) || [];
+
+    if (tarjetas.length === 0) {
+      listaTarjetas.innerHTML = "<p class='text-muted'>No tienes tarjetas guardadas.</p>";
+      return;
+    }
+
+    tarjetas.forEach((t, i) => {
+      const masked = "**** **** **** " + t.numero.slice(-4);
+      const cardHTML = `
+        <div class="col-md-4">
+          <div class="card shadow-sm p-3">
+            <h6>${masked}</h6>
+            <p class="mb-1">${t.nombre}</p>
+            <small>Vence: ${t.vencimiento}</small>
+            <div class="text-end mt-2">
+              <button class="btn btn-sm btn-danger eliminar-tarjeta" data-index="${i}">Eliminar</button>
+            </div>
+          </div>
+        </div>`;
+      listaTarjetas.insertAdjacentHTML("beforeend", cardHTML);
+    });
+  }
+
+  // --- Abrir modal para agregar tarjeta ---
+  btnNuevaTarjeta.addEventListener("click", () => {
+    numeroTarjeta.value = "";
+    nombreTarjeta.value = "";
+    vencimientoTarjeta.value = "";
+    cvvTarjeta.value = "";
+
+    const modal = new bootstrap.Modal(document.getElementById("modalTarjeta"));
+    modal.show();
+  });
+
+  // --- Guardar nueva tarjeta ---
+  guardarTarjetaBtn.addEventListener("click", () => {
+    if (!numeroTarjeta.value || !nombreTarjeta.value || !vencimientoTarjeta.value || !cvvTarjeta.value) {
+      alert("❗ Completa todos los campos de la tarjeta");
+      return;
+    }
+
+    const tarjetas = JSON.parse(localStorage.getItem("tarjetas")) || [];
+    tarjetas.push({
+      numero: numeroTarjeta.value,
+      nombre: nombreTarjeta.value,
+      vencimiento: vencimientoTarjeta.value,
+      cvv: cvvTarjeta.value
+    });
+
+    localStorage.setItem("tarjetas", JSON.stringify(tarjetas));
+
+    alert("✅ Tarjeta guardada correctamente");
+    bootstrap.Modal.getInstance(document.getElementById("modalTarjeta")).hide();
+    cargarTarjetas();
+  });
+
+  // --- Eliminar tarjeta ---
+  listaTarjetas.addEventListener("click", (e) => {
+    if (e.target.classList.contains("eliminar-tarjeta")) {
+      const index = e.target.dataset.index;
+      const tarjetas = JSON.parse(localStorage.getItem("tarjetas")) || [];
+      tarjetas.splice(index, 1);
+      localStorage.setItem("tarjetas", JSON.stringify(tarjetas));
+      cargarTarjetas();
+    }
+  });
+
+  // --- Mostrar tarjetas al cargar ---
+  cargarTarjetas();
 });
 
-// --- MODO OSCURO ---
+// ----------------------------------------------------------------
+// 🌙 MODO OSCURO
+// ----------------------------------------------------------------
 const chkOscuro = document.getElementById("toggleDarkMode");
 const divFondo = document.getElementById("fondo");
 
@@ -113,4 +199,3 @@ chkOscuro.addEventListener("change", () => {
   divFondo.classList.toggle("dark-mode", chkOscuro.checked);
   localStorage.setItem("modoOscuro", chkOscuro.checked);
 });
-

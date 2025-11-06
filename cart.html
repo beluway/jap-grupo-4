@@ -52,15 +52,122 @@
     <main>
     <h3>Tu carrito</h3>
     <div class="container">
-  <div class="carrito" id="productoCarrito"></div>
-  <div class="total">
+      <div class="carrito" id="productoCarrito"></div>
+      <div class="total">
         <ul>
           <li><h4>Total</h4></li>
+          <li id="tipoEnvioSeleccionado" class="text-secondary fst-italic"></li>
           <li class="precio">$precio</li>
+          <li> 
+            
+            <label for="moneda">Mostrar precio en:</label>
+            <select id="moneda">
+              <option value="UYU">Pesos Uruguayos (UYU)</option>
+              <option value="USD">Dólares (USD)</option>
+            </select>
+          </li>
+          
           <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">comprar</button></li>
         </ul>
       </div>
+      
     </div>
+
+
+<!-- BOTÓN PARA ABRIR MODAL -->
+ <div id="modal">
+<button type="button" class="btn btn-primary modal-envio" data-bs-toggle="modal" data-bs-target="#modalEnvio">
+  Seleccionar Tipo de Envío
+</button></div>
+
+<!-- MODAL DE SELECCIÓN -->
+<div class="modal fade" id="modalEnvio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEnvioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEnvioLabel">Seleccione un Tipo de Envío</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="direccion-tab" data-bs-toggle="tab" data-bs-target="#direccion" type="button" role="tab" aria-controls="direccion" aria-selected="true">Dirección</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="envio-tab" data-bs-toggle="tab" data-bs-target="#envio" type="button" role="tab" aria-controls="envio" aria-selected="false">Tipo de envío</button>
+          </li>
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content mt-3" id="myTabContent">
+          <div class="tab-pane fade show active" id="direccion" role="tabpanel" aria-labelledby="direccion-tab">
+            <!-- Formulario de direccion -->
+            <form class="direccion">
+              <div class="mb-3">
+                <label for="depto-input" class="form-label">Departamento</label>
+                <input type="text" class="form-control" id="depto-input">
+              </div>
+              <div class="mb-3">
+                <label for="localidad-input" class="form-label">Localidad</label>
+                <input type="text" class="form-control" id="localidad-input">
+              </div>
+              <div class="mb-3">
+                <label for="calle-input" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle-input">
+              </div>
+              <div class="mb-3">
+                <label for="numero-input" class="form-label">Número</label>
+                <input type="number" class="form-control" id="numero-input">
+              </div>
+              <div class="mb-3">
+                <label for="esquina-input" class="form-label">Esquina</label>
+                <input type="text" class="form-control" id="esquina-input">
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="envio" role="tabpanel" aria-labelledby="envio-tab">
+        
+            <!-- Tipo de envío -->
+            <form id="form-envio">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioPremium" value="15" required>
+                <label class="form-check-label" for="envioPremium">
+                  Premium 2 a 5 días (15%)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioExpress" value="7">
+                <label class="form-check-label" for="envioExpress">
+                  Express 5 a 8 días (7%)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioStandard" value="5">
+                <label class="form-check-label" for="envioStandard">
+                  Standard 12 a 15 días (5%)
+                </label>
+              </div>  
+            </form>
+            <div>
+              <label class="form-check-label">
+              <p>Costo de envío: <span id="montoEnvio"></span></p>
+              </label>
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-aceptar-envio">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
     </main>
     <footer class="text-muted">
     <div class="container">
