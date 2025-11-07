@@ -50,35 +50,38 @@
   </nav>
   <div id="fondo">
     <main>
+      
     <h3>Tu carrito</h3>
     <div class="container">
       <div class="carrito" id="productoCarrito"></div>
+      <div class="tipoEnvio">
+      <!-- BOTÓN PARA ABRIR MODAL -->
+      <div id="modal">
+      <button type="button" class="btn btn-primary modal-envio" data-bs-toggle="modal" data-bs-target="#modalEnvio">
+        Seleccionar Tipo de Envío
+      </button>
+    </div>
+      </div>
+
+    <br>
+      
       <div class="total">
+        
         <ul>
-          <li><h4>Total</h4></li>
+          <li><h4>Resumen</h4></li>
+          <hr>
           <li id="tipoEnvioSeleccionado" class="text-secondary fst-italic"></li>
-          <li class="precio">$precio</li>
+          <hr>
+          <li class="text-secondary fst-italic"><p>Productos: <span id="montoProductos"></span></p></li>
+          <hr>
+          <li><p><strong>Total: </strong><span class="precio"></span></p></li>
           <li> 
-            
             <label for="moneda">Mostrar precio en:</label>
             <select id="moneda">
               <option value="UYU">Pesos Uruguayos (UYU)</option>
               <option value="USD">Dólares (USD)</option>
             </select>
           </li>
-          
-          <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">comprar</button></li>
-        </ul>
-      </div>
-      
-    </div>
-
-
-<!-- BOTÓN PARA ABRIR MODAL -->
- <div id="modal">
-<button type="button" class="btn btn-primary modal-envio" data-bs-toggle="modal" data-bs-target="#modalEnvio">
-  Seleccionar Tipo de Envío
-</button></div>
 
 <!-- MODAL DE SELECCIÓN -->
 <div class="modal fade" id="modalEnvio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEnvioLabel" aria-hidden="true">
@@ -152,7 +155,7 @@
             </form>
             <div>
               <label class="form-check-label">
-              <p>Costo de envío: <span id="montoEnvio"></span></p>
+              <p> <span id="montoEnvio"></span></p>
               </label>
             </div>
           </div>
@@ -168,6 +171,13 @@
     </div>
   </div>
 </div>
+          <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">Comprar</button></li>
+        </ul>
+      </div>
+      
+    </div>
+
+
     </main>
     <footer class="text-muted">
     <div class="container">

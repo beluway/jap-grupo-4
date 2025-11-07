@@ -329,6 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tipoEnvioTexto = document.getElementById("tipoEnvioSeleccionado");
   const modalEnvio = document.getElementById("modalEnvio");
   const btnAceptarEnvio = document.getElementById("btn-aceptar-envio");
+  const montoProductos = document.getElementById("montoProductos");
   const totalConEnvioModal = document.getElementById("totalConEnvio");
 
   // Recuperar carrito y envío desde localStorage
@@ -382,13 +383,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalConEnvio = subtotal + subtotal * (envioSeleccionado / 100);
     totalElement.textContent = `$${totalConEnvio.toFixed(2)}`;
 
-    // Mostrar tipo de envío debajo del total
+    // Mostrar costo de envío en el resumen
     if (tipoEnvioTexto) {
       tipoEnvioTexto.textContent = nombreEnvio
-        ? `Envío: ${nombreEnvio}`
+        ?  `Envío: ${subtotal * envioSeleccionado/100}`
         : "No se ha seleccionado envío";
     }
+    
+    //mostrar costo de productos en el resumen
+   if (montoProductos) {
+  montoProductos.textContent = `$${subtotal.toFixed(2)}`;
   }
+  
+} 
+
+
+
 
 // ========== EVENTOS DEL MODAL ==========
 const montoEnvioSpan = document.getElementById("montoEnvio");
@@ -445,6 +455,21 @@ if (btnAceptarEnvio) {
     localStorage.setItem("tipoEnvio", envioSeleccionado);
     localStorage.setItem("nombreEnvio", nombreEnvio);
 
+    //Guardado de direccion
+    const departamento = document.getElementById("depto-input").value.trim();
+    const localidad = document.getElementById("localidad-input").value.trim();
+    const calle = document.getElementById("calle-input").value.trim();
+    const numero = document.getElementById("numero-input").value.trim();
+    const esquina = document.getElementById("esquina-input").value.trim();
+
+    if(!departamento || !localidad || !calle || !numero || !esquina){
+      alert("Por favor complete todos los campos de dirección");
+      return;
+    }
+
+    const direccion = { departamento, localidad, calle, numero, esquina };
+    localStorage.setItem("direccionEnvio", JSON.stringify(direccion));
+
     // Actualizar la vista del carrito
     renderizarCarrito();
 
@@ -489,11 +514,12 @@ if (btnAceptarEnvio) {
   const btnComprar = document.getElementById("btn-comprar");
   if (btnComprar) {
     btnComprar.addEventListener("click", () => {
-      alert("¡Gracias por tu compra!");
+      /* alert("¡Gracias por tu compra!");
       carrito = [];
       localStorage.setItem("carrito", JSON.stringify([]));
       renderizarCarrito();
-      window.actualizarContadorCarrito?.();
+      window.actualizarContadorCarrito?.(); */
+      window.location = "checkout.html"
     });
   }
 

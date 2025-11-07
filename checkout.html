@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/checkout.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="userName" href="my-profile.html"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="cerrar">Cerrar sesión</a>
+          </li>
+          <li class="nav-item text-white">
+          <label class="switch">
+          <input type="checkbox" id="toggleDarkMode">
+          <span class="slider"></span>
+          </label>
+          <span class="label-text">Modo Oscuro</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="fondo">
+    <main>
+        <h1>Métodos de Pago</h1>
+
+        <ul>
+            <div id="tarjeta">
+                <li>Tarjeta de Crédito</li>
+            <!-- BOTÓN PARA ABRIR MODAL -->
+            <div id="modal">
+            <button type="button" class="btn btn-primary modal-tarjeta" data-bs-toggle="modal" data-bs-target="#modalTarjeta">
+                Seleccionar Tarjeta
+            </button>
+            </div>
+            
+            <div id="transferencia">
+                <li>Transferencia Bancaria</li>
+            </div>
+            
+        </ul>
+
+        <!-- MODAL DE SELECCIÓN -->
+<div class="modal fade" id="modalTarjeta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEnvioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEnvioLabel">Seleccione un Tipo de Envío</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="agregarTarjeta-tab" data-bs-toggle="tab" data-bs-target="#agregarTarjeta" type="button" role="tab" aria-controls="agregarTarjeta" aria-selected="true">Agregar Tarjeta</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="agregar-tab" data-bs-toggle="tab" data-bs-target="#agregar" type="button" role="tab" aria-controls="agregar" aria-selected="false">Agregar Tarjeta</button>
+          </li>
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content mt-3" id="myTabContent">
+          <div class="tab-pane fade show active" id="direccion" role="tabpanel" aria-labelledby="direccion-tab">
+            <!-- Mi Billetera -->
+            <form class="billeterra">
+              <div class="mb-3">
+                <label for="depto-input" class="form-label">Departamento</label>
+                <input type="text" class="form-control" id="depto-input">
+              </div>
+              <div class="mb-3">
+                <label for="localidad-input" class="form-label">Localidad</label>
+                <input type="text" class="form-control" id="localidad-input">
+              </div>
+              <div class="mb-3">
+                <label for="calle-input" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle-input">
+              </div>
+              <div class="mb-3">
+                <label for="numero-input" class="form-label">Número</label>
+                <input type="number" class="form-control" id="numero-input">
+              </div>
+              <div class="mb-3">
+                <label for="esquina-input" class="form-label">Esquina</label>
+                <input type="text" class="form-control" id="esquina-input">
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="envio" role="tabpanel" aria-labelledby="envio-tab">
+        
+            <!-- Tipo de envío -->
+            <form id="form-envio">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioPremium" value="15" required>
+                <label class="form-check-label" for="envioPremium">
+                  Premium 2 a 5 días (15%)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioExpress" value="7">
+                <label class="form-check-label" for="envioExpress">
+                  Express 5 a 8 días (7%)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioStandard" value="5">
+                <label class="form-check-label" for="envioStandard">
+                  Standard 12 a 15 días (5%)
+                </label>
+              </div>  
+            </form>
+            <div>
+              <label class="form-check-label">
+              <p> <span id="montoEnvio"></span></p>
+              </label>
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-aceptar-envio">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+     
+    </main>
+    <footer class="text-muted">
+        <div class="container">
+            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+            <p class="float-end">
+            <a href="#">Volver arriba</a>
+            </p>
+        </div>
+    </footer>
+  </div>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/checkout.js" type="module"></script>
+</body>
+
+</html>

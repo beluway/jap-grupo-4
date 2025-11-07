@@ -532,6 +532,14 @@ background-color: rgb(75, 75, 75) !important;
   display: block;
   justify-content: center;
   text-align: center;
+  background-color: rgba(255, 197, 142, 0.801);
+  border-color: orange;
+  box-shadow:#f39821;
+  color: black;
+}
+.modal-envio:hover{
+  background-color: orange;
+  border-color: white;
 }
 
 body.dark-mode .cart-count,
@@ -541,4 +549,24 @@ body.dark-mode .cart-count,
 
 #cerrar{
   cursor: pointer;
+}
+
+.dark-mode select,
+.dark-mode option {
+  background-color: #222;    
+  color: #fff;                
+  border: 1px solid #555;     
+}
+
+.dark-mode select:focus {
+  outline: none;
+  box-shadow: 0 0 4px #888;   
+}
+
+
+.dark-mode input,
+.dark-mode textarea {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #555;
 }

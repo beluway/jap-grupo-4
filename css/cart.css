@@ -107,12 +107,36 @@ footer .container{
 .modal-body, .modal-header, .modal-footer{
     background-color: white;
 }
+
+#myTab{
+    border-bottom: 3px solid orange;
+}
 .nav-tabs .nav-link.active{
     background-color: orange;
+    color:white;
+}
+.modal-body{
+    padding:0;
 }
 
 .nav-tabs .nav-link {
   transition: all 0.2s ease;
+  color:orange;
+  font-weight:bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border:none;
+}
+li.nav-item{
+    padding-bottom:0px;
+}
+form.direccion input{
+    max-width: 90%;
+    margin:auto;
+}
+div#envio{
+    margin:auto;
+    max-width: 90%;
 }
 
 @media (max-width:600px){
