@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <div class="unidades d-flex align-items-center gap-2">
             <button class="menos btn btn-sm btn-outline-secondary" data-index="${index}">−</button>
-            <input type="number" class="cantidad form-control text-center" value="${producto.cantidad}" min="1" data-index="${index}" style="width: 60px;">
+            <input type="number" id="inputCantidad" class="cantidad form-control text-center" value="${producto.cantidad}" min="1" data-index="${index}" style="width: 60px;">
             <button class="mas btn btn-sm btn-outline-secondary" data-index="${index}">+</button>
           </div>
 
@@ -382,6 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Calcular total con envío
     const totalConEnvio = subtotal + subtotal * (envioSeleccionado / 100);
     totalElement.textContent = `$${totalConEnvio.toFixed(2)}`;
+    localStorage.setItem('totalCarrito',totalConEnvio.toString());
 
     // Mostrar costo de envío en el resumen
     if (tipoEnvioTexto) {
@@ -475,6 +476,8 @@ if (btnAceptarEnvio) {
 
     // Cerrar modal
     const modal = bootstrap.Modal.getInstance(modalEnvio);
+    document.activeElement.blur(); //saca el foco del botón activo para 
+    // evitar error “Blocked aria-hidden on an element because its descendant retained focus…”
     modal.hide();
   });
 }
@@ -504,7 +507,6 @@ if (btnAceptarEnvio) {
       const index = e.target.dataset.index;
       const nuevaCantidad = parseInt(e.target.value);
       if (nuevaCantidad > 0) carrito[index].cantidad = nuevaCantidad;
-      localStorage.setItem("carrito", JSON.stringify(carrito));
       renderizarCarrito();
       window.actualizarContadorCarrito?.();
     }
@@ -514,11 +516,11 @@ if (btnAceptarEnvio) {
   const btnComprar = document.getElementById("btn-comprar");
   if (btnComprar) {
     btnComprar.addEventListener("click", () => {
-      /* alert("¡Gracias por tu compra!");
-      carrito = [];
-      localStorage.setItem("carrito", JSON.stringify([]));
-      renderizarCarrito();
-      window.actualizarContadorCarrito?.(); */
+
+      localStorage.setItem('subtotalCarrito', subtotal.toFixed(2));
+      localStorage.setItem('costoEnvio', (subtotal * envioSeleccionado / 100).toFixed(2));
+      localStorage.setItem('totalCarrito', totalConEnvio.toFixed(2));
+
       window.location = "checkout.html"
     });
   }

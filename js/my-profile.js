@@ -88,11 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaTarjetas = document.getElementById("listaTarjetas");
   const modalTarjeta = new bootstrap.Modal(document.getElementById("modalTarjeta"));
 
-  const numeroTarjeta = document.getElementById("numeroTarjeta");
+  const numero = document.getElementById("numeroTarjeta");
   const nombreTarjeta = document.getElementById("nombreTarjeta");
-  const mesVencimiento = document.getElementById("mesVencimiento");
-  const anioVencimiento = document.getElementById("anioVencimiento");
-  const cvvTarjeta = document.getElementById("cvvTarjeta");
+  const mes = document.getElementById("mesVencimiento");
+  const anio = document.getElementById("anioVencimiento");
+  const cvv = document.getElementById("cvvTarjeta");
 
   // --- Generar años dinámicamente ---
   const anioActual = new Date().getFullYear();
@@ -140,11 +140,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const nuevaTarjeta = {
+    /* const nuevaTarjeta = {
       numero: numeroTarjeta.value.trim(),
       nombre: nombreTarjeta.value.trim(),
       vencimiento: `${mesVencimiento.value}/${anioVencimiento.value}`,
       cvv: cvvTarjeta.value.trim(),
+    }; */
+          const nuevaTarjeta = {
+      numero,
+      nombreTarjeta,
+      vencimiento: `${mes}/${anio}`,
+      cvv
     };
 
     tarjetas.push(nuevaTarjeta);

@@ -1,183 +1,205 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Métodos de Pago</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link href="css/checkout.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
+  <div id="fondo">
+        <!-- 🔹 NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 justify-content-between">
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
+            <li class="nav-item">
               <a class="nav-link" id="userName" href="my-profile.html"></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="cerrar">Cerrar sesión</a>
-          </li>
-          <li class="nav-item text-white">
-          <label class="switch">
-          <input type="checkbox" id="toggleDarkMode">
-          <span class="slider"></span>
-          </label>
-          <span class="label-text">Modo Oscuro</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div id="fondo">
-    <main>
-        <h1>Métodos de Pago</h1>
-
-        <ul>
-            <div id="tarjeta">
-                <li>Tarjeta de Crédito</li>
-            <!-- BOTÓN PARA ABRIR MODAL -->
-            <div id="modal">
-            <button type="button" class="btn btn-primary modal-tarjeta" data-bs-toggle="modal" data-bs-target="#modalTarjeta">
-                Seleccionar Tarjeta
-            </button>
-            </div>
-            
-            <div id="transferencia">
-                <li>Transferencia Bancaria</li>
-            </div>
-            
-        </ul>
-
-        <!-- MODAL DE SELECCIÓN -->
-<div class="modal fade" id="modalTarjeta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEnvioLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalEnvioLabel">Seleccione un Tipo de Envío</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-        <!-- Tabs -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="agregarTarjeta-tab" data-bs-toggle="tab" data-bs-target="#agregarTarjeta" type="button" role="tab" aria-controls="agregarTarjeta" aria-selected="true">Agregar Tarjeta</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="agregar-tab" data-bs-toggle="tab" data-bs-target="#agregar" type="button" role="tab" aria-controls="agregar" aria-selected="false">Agregar Tarjeta</button>
-          </li>
-        </ul>
-
-        <!-- Tab content -->
-        <div class="tab-content mt-3" id="myTabContent">
-          <div class="tab-pane fade show active" id="direccion" role="tabpanel" aria-labelledby="direccion-tab">
-            <!-- Mi Billetera -->
-            <form class="billeterra">
-              <div class="mb-3">
-                <label for="depto-input" class="form-label">Departamento</label>
-                <input type="text" class="form-control" id="depto-input">
-              </div>
-              <div class="mb-3">
-                <label for="localidad-input" class="form-label">Localidad</label>
-                <input type="text" class="form-control" id="localidad-input">
-              </div>
-              <div class="mb-3">
-                <label for="calle-input" class="form-label">Calle</label>
-                <input type="text" class="form-control" id="calle-input">
-              </div>
-              <div class="mb-3">
-                <label for="numero-input" class="form-label">Número</label>
-                <input type="number" class="form-control" id="numero-input">
-              </div>
-              <div class="mb-3">
-                <label for="esquina-input" class="form-label">Esquina</label>
-                <input type="text" class="form-control" id="esquina-input">
-              </div>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="envio" role="tabpanel" aria-labelledby="envio-tab">
-        
-            <!-- Tipo de envío -->
-            <form id="form-envio">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioPremium" value="15" required>
-                <label class="form-check-label" for="envioPremium">
-                  Premium 2 a 5 días (15%)
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioExpress" value="7">
-                <label class="form-check-label" for="envioExpress">
-                  Express 5 a 8 días (7%)
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="tipoEnvio" id="envioStandard" value="5">
-                <label class="form-check-label" for="envioStandard">
-                  Standard 12 a 15 días (5%)
-                </label>
-              </div>  
-            </form>
-            <div>
-              <label class="form-check-label">
-              <p> <span id="montoEnvio"></span></p>
+            <li class="nav-item"><a class="nav-link" id="cerrar">Cerrar sesión</a></li>
+            <li>
+              <a href="cart.html" id="carrito" class="position-relative">
+                <span class="material-symbols-outlined" id="shopping_cart">shopping_cart</span>
+                <span id="cart-count" class="cart-count">0</span>
+              </a>
+            </li>
+            <li class="nav-item text-white">
+              <label class="switch">
+                <input type="checkbox" id="toggleDarkMode">
+                <span class="slider"></span>
               </label>
-            </div>
+              <span class="label-text">Modo Oscuro</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--Contenido principal-->
+  <main class="container py-5">
+    <h1 class="mb-4 text-center">Métodos de Pago</h1>
+
+    <!-- 🧾 RESUMEN DEL PEDIDO -->
+<section id="resumenPedido" class="mt-5">
+  <h3 class="mb-3 text-center">Resumen del Pedido</h3>
+  <div class="card p-3 shadow-sm">
+    <ul class="list-group list-group-flush" id="listaResumen">
+      <!-- Productos se insertan con JS -->
+    </ul>
+    <hr>
+    <p id="resumenEnvio" class="text-end fw-bold"></p>
+    <p id="resumenSubtotal" class="text-end fw-bold"></p>
+    <p id="resumenTotal" class="text-end fs-5"></p>
+  </div>
+</section>
+
+<!-- Tarjeta seleccionada -->
+      <p id="tarjetaSeleccionada" class="text-success fw-semibold mt-2 d-none"></p>
+
+    <ul class="list-group">
+      <!-- Método: Tarjeta -->
+      <li class="list-group-item">
+        <h5>💳 Tarjeta de Crédito</h5>
+        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalTarjeta">
+          Seleccionar Tarjeta
+        </button>
+      </li>
+
+      <!-- Método: Transferencia -->
+      <li class="list-group-item mt-3">
+        <h5>🏦 Transferencia Bancaria</h5>
+        <p class="text-muted mb-1">Datos para transferencia:</p>
+        <ul class="mb-0">
+          <li>Banco BROU</li>
+          <li>N° de cuenta: <strong>00123456789</strong></li>
+          <li>Titular: <strong>eMercado S.A.</strong></li>
+        </ul>
+      </li>
+    </ul>
+
+    
+
+    <!-- Botón de finalizar -->
+    <div class="text-center mt-4">
+      <button id="btnFinalizarCompra" class="btn btn-success btn-lg">Finalizar compra</button>
+    </div>
+
+    <!-- MODAL DE TARJETAS -->
+    <div class="modal fade" id="modalTarjeta" tabindex="-1" aria-labelledby="modalTarjetaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content p-3" style="border-radius: 15px;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTarjetaLabel">Selecciona o agrega una tarjeta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
 
-        </div>
-        
-      </div>
+          <div class="modal-body">
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" id="tarjetaTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="miBilletera-tab" data-bs-toggle="tab"
+                        data-bs-target="#miBilletera" type="button" role="tab"
+                        aria-controls="miBilletera" aria-selected="true">
+                  💰 Mi Billetera
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="agregarTarjeta-tab" data-bs-toggle="tab"
+                        data-bs-target="#agregarTarjeta" type="button" role="tab"
+                        aria-controls="agregarTarjeta" aria-selected="false">
+                  ➕ Agregar Tarjeta
+                </button>
+              </li>
+            </ul>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="btn-aceptar-envio">Aceptar</button>
+            <!-- Contenido de Tabs -->
+            <div class="tab-content mt-3" id="tarjetaTabsContent">
+              <!-- 🟢 TAB MI BILLETERA -->
+              <div class="tab-pane fade show active" id="miBilletera" role="tabpanel" aria-labelledby="miBilletera-tab">
+                <div id="listaTarjetas" class="row g-3">
+                  <!-- Aquí se cargan las tarjetas guardadas con JS -->
+                </div>
+              </div>
+
+              <!-- 🟣 TAB AGREGAR TARJETA -->
+              <div class="tab-pane fade" id="agregarTarjeta" role="tabpanel" aria-labelledby="agregarTarjeta-tab">
+                <form id="formNuevaTarjeta" class="mt-3">
+                  <div class="mb-3">
+                    <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
+                    <input type="text" id="numeroTarjeta" class="form-control" maxlength="16"
+                           placeholder="XXXX XXXX XXXX XXXX" required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="nombreTarjeta" class="form-label">Nombre en la tarjeta</label>
+                    <input type="text" id="nombreTarjeta" class="form-control" required>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="mesVencimiento" class="form-label">Mes</label>
+                      <select id="mesVencimiento" class="form-select" required>
+                        <option value="" disabled selected>Mes</option>
+                        <option value="01">01 - Enero</option>
+                        <option value="02">02 - Febrero</option>
+                        <option value="03">03 - Marzo</option>
+                        <option value="04">04 - Abril</option>
+                        <option value="05">05 - Mayo</option>
+                        <option value="06">06 - Junio</option>
+                        <option value="07">07 - Julio</option>
+                        <option value="08">08 - Agosto</option>
+                        <option value="09">09 - Septiembre</option>
+                        <option value="10">10 - Octubre</option>
+                        <option value="11">11 - Noviembre</option>
+                        <option value="12">12 - Diciembre</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="anioVencimiento" class="form-label">Año</label>
+                      <select id="anioVencimiento" class="form-select" required>
+                        <option value="" disabled selected>Año</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="cvvTarjeta" class="form-label">CVV</label>
+                    <input type="password" id="cvvTarjeta" maxlength="3" class="form-control" placeholder="123" required>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar Tarjeta</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div> <!-- modal-body -->
+        </div>
       </div>
     </div>
+  </main>
+
+  <footer class="text-muted text-center mt-5">
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
+    <a href="#">Volver arriba</a>
+  </footer>
   </div>
-</div>
-     
-    </main>
-    <footer class="text-muted">
-        <div class="container">
-            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-            <p class="float-end">
-            <a href="#">Volver arriba</a>
-            </p>
-        </div>
-    </footer>
-  </div>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/checkout.js" type="module"></script>
 </body>
-
 </html>
