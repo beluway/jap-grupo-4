@@ -381,6 +381,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Calcular total con envío
     const totalConEnvio = subtotal + subtotal * (envioSeleccionado / 100);
+    localStorage.setItem("subtotalCarrito",subtotal.toFixed(2));
+    localStorage.setItem("totalCarrito",totalConEnvio.toFixed(2));
     totalElement.textContent = `$${totalConEnvio.toFixed(2)}`;
 
     // Mostrar costo de envío en el resumen
@@ -514,11 +516,7 @@ if (btnAceptarEnvio) {
   const btnComprar = document.getElementById("btn-comprar");
   if (btnComprar) {
     btnComprar.addEventListener("click", () => {
-      /* alert("¡Gracias por tu compra!");
-      carrito = [];
-      localStorage.setItem("carrito", JSON.stringify([]));
-      renderizarCarrito();
-      window.actualizarContadorCarrito?.(); */
+
       if (carrito.length === 0) {
       let aviso = document.getElementById("aviso");
       aviso.textContent="¡ATENCIÓN! El carrito está vacío. Agregue algo antes de comprar.";

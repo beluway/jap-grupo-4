@@ -140,9 +140,10 @@ function cargarTarjetas() {
 // ================== RESUMEN DEL PEDIDO ==================
 function mostrarResumen() {
   const productos = JSON.parse(localStorage.getItem("cartProducts")) || [];
-  const tipoEnvio = localStorage.getItem("nombreEnvio") || "No seleccionado";
+  const nombreEnvio = localStorage.getItem("nombreEnvio") || "No seleccionado";
   const subtotalLS = parseFloat(localStorage.getItem("subtotalCarrito")) || 0;
-  const costoEnvioLS = parseFloat(localStorage.getItem("costoEnvio")) || 0;
+  let porcentajeEnvioLS = parseFloat(localStorage.getItem("tipoEnvio")) || 0;
+  const costoEnvioLS = subtotalLS * porcentajeEnvioLS / 100;
   const totalLS = parseFloat(localStorage.getItem("totalCarrito")) || 0;
 
   const lista = document.getElementById("listaResumen");
@@ -163,8 +164,8 @@ function mostrarResumen() {
 
   // Mostrar resumen de totales
   resumenSubtotal.textContent = `Subtotal: $${subtotalLS.toFixed(2)}`;
-  resumenEnvio.textContent = tipoEnvio
-    ? `Envío (${tipoEnvio}): $${costoEnvioLS.toFixed(2)}`
+  resumenEnvio.textContent = nombreEnvio
+    ? `Envío (${nombreEnvio}): $${costoEnvioLS.toFixed(2)}`
     : "Envío no seleccionado";
   resumenTotal.textContent = `Total: $${totalLS.toFixed(2)}`;
 }
