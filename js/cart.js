@@ -519,7 +519,14 @@ if (btnAceptarEnvio) {
       localStorage.setItem("carrito", JSON.stringify([]));
       renderizarCarrito();
       window.actualizarContadorCarrito?.(); */
-      window.location = "checkout.html"
+      if (carrito.length === 0) {
+      let aviso = document.getElementById("aviso");
+      aviso.textContent="¡ATENCIÓN! El carrito está vacío. Agregue algo antes de comprar.";
+      aviso.style.color="red";
+    }
+    else{
+      window.location = "checkout.html";
+    }
     });
   }
 

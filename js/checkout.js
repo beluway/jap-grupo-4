@@ -175,10 +175,18 @@ const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
 if (btnFinalizarCompra) {
   btnFinalizarCompra.addEventListener("click", () => {
     alert("✅ Compra realizada con éxito. ¡Gracias por tu pedido!");
-    localStorage.removeItem("cartProducts");
+    localStorage.removeItem("carrito");
     localStorage.removeItem("tipoEnvio");
     localStorage.removeItem("porcentajeEnvio");
-    window.location.href = "confirmacion.html";
+    localStorage.removeItem("productID");
+    localStorage.removeItem("catID");
+    localStorage.removeItem("direccionEnvio");
+    localStorage.removeItem("costoEnvio");
+    localStorage.removeItem("nombreEnvio");
+    localStorage.removeItem("subtotalCarrito");
+    localStorage.removeItem("totalCarrito");
+    localStorage.removeItem("tarjetaSeleccionada");
+    window.location.href = "cart.html";
   });
 }
 
