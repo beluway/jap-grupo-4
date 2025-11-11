@@ -64,6 +64,10 @@
             
             <div id="transferencia">
                 <li>Transferencia Bancaria</li>
+            ️  <!-- Boton de transferencia -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-transfer">
+                Iniciar Transferencia
+              </button>
             </div>
             
         </ul>
@@ -157,6 +161,55 @@
   </div>
 </div>
      
+
+
+<!-- Modal de transferencia-->
+<div class="modal fade" id="modal-transfer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Transferencia bancaria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form class="container">
+          <div class="mb-3">
+            <label for="cuenta-origen" class="form-label">Cuenta de origen</label>
+            <input type="text" class="form-control" id="cuenta-origen" placeholder="XXX-YY-ZZZZZZ-S">
+          </div>
+            <div class="mb-3">
+                <label for="cuenta-destino" class="form-label">Cuenta de destino</label>
+                <input type="text" class="form-control" id="cuenta-destino" readonly value="999-99-999999-9">
+            </div>
+            <div class="mb-3 row">
+              <div class="col-6">
+                <label for="importe" class="form-label">Importe</label>
+                <input type="number" class="form-control" id="importe" placeholder="0.00">
+              </div>
+              <div class="col-3 moneda">
+                <label for="moneda" class="form-label visually-hidden">Moneda</label>
+                <select class="form-select" id="moneda">
+                  <option value="UYU">UYU</option>
+                  <option value="USD">USD</option>
+                </select>
+              </div>
+            </div>
+          <div class="mb-3">
+            <label for="asunto" class="form-label">Asunto</label>
+            <input type="text" class="form-control" id="asunto" placeholder="Compra en eMercado">
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="aceptar-trans">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     </main>
     <footer class="text-muted">
         <div class="container">
