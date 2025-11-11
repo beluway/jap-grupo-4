@@ -1,0 +1,13 @@
+#moneda{
+    margin-top: 32px;
+}
+div.moneda{
+    min-width: fit-content;
+}
+#cuenta-destino{
+    color:rgba(0, 0, 0, 0.300)
+}
+#aviso-compra{
+    text-align: center;
+    margin-top: 10px;
+}
