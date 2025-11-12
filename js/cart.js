@@ -528,6 +528,16 @@ if (btnAceptarEnvio) {
     else if(envioSeleccionado === 0){
       aviso.textContent = "¡ATENCIÓN! Debe seleccionar un tipo de envío antes de continuar."
       aviso.style.color="red";
+       setTimeout(() => {
+        aviso.textContent = "";
+      }, 3000);
+    }else if(envioSeleccionado === 0 || !localStorage.getItem("direccionEnvio")){
+      let faltaEnvio = document.getElementById("faltaEnvio");
+      faltaEnvio.textContent="¡ATENCIÓN! Por favor complete los datos de envío.";
+      faltaEnvio.style.color="red";
+       setTimeout(() => {
+        faltaEnvio.textContent = "";
+      }, 3000);
     }
     else{
       window.location = "checkout.html";

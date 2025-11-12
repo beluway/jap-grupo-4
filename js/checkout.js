@@ -203,6 +203,15 @@ const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
 
 if (btnFinalizarCompra) {
   btnFinalizarCompra.addEventListener("click", () => {
+    if(!localStorage.getItem("tarjetaSeleccionada") || !localStorage.getItem("transferencia")){
+      let faltaPago = document.getElementById("aviso-compra");
+      faltaPago.textContent = "Debes seleccionar un método de pago antes de finalizar la compra.";
+      faltaPago.style.color = "red";
+      setTimeout(() => {
+        faltaPago.textContent = "";
+      }, 3000);
+      return;
+    }
     alert("✅ Compra realizada con éxito. ¡Gracias por tu pedido!");
     localStorage.removeItem("carrito");
     localStorage.removeItem("tipoEnvio");
@@ -215,6 +224,7 @@ if (btnFinalizarCompra) {
     localStorage.removeItem("subtotalCarrito");
     localStorage.removeItem("totalCarrito");
     localStorage.removeItem("tarjetaSeleccionada");
+    localStorage.removeItem("transferencia");
     window.location.href = "cart.html";
   });
 }
@@ -283,6 +293,9 @@ if (chkOscuro && divFondo) {
 
 // ================== CARGA INICIAL ==================
 document.addEventListener("DOMContentLoaded", () => {
+  if(!localStorage.getItem("direccionEnvio")||!localStorage.getItem("tipoEnvio")||!localStorage.getItem("carrito")){
+  window.location.href = "cart.html";
+  }
   const usuario = getUsuario();
   const userNameElement = document.getElementById("userName");
   if (usuario && userNameElement) userNameElement.textContent = usuario.email;
@@ -290,4 +303,28 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarTarjetas();
   mostrarResumen();
   mostrarTarjetaSeleccionada();
+});
+
+// ========== MODAL TRANSFERENCIA BANCARIA ==========
+const btnTransferencia = document.getElementById('aceptar-trans');
+const modalTansferencia = document.getElementById('modal-transfer')
+
+btnTransferencia.addEventListener('click',()=>{
+
+  const origen = document.getElementById("cuenta-origen").value.trim();
+  const importe = document.getElementById("importe").value.trim();
+  const moneda = document.getElementById("moneda").value.trim();
+  const asunto = document.getElementById("asunto").value.trim();
+
+  if(!origen || !importe || !moneda || !asunto){
+    alert("Por favor complete todos los campos.");
+    return;
+  }
+
+  const transferencia = { origen, importe, moneda, asunto};
+  localStorage.setItem("transferencia", JSON.stringify(transferencia));
+
+  // Cerrar modal
+  const modal = bootstrap.Modal.getInstance(modalTansferencia);
+  modal.hide();
 });

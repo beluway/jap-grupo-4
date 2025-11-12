@@ -15,7 +15,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
+    <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -54,6 +54,11 @@
     <h3>Tu carrito</h3>
     <div class="container">
       <div class="carrito" id="productoCarrito"></div>
+      
+
+      <br>
+      
+    <div>
       <div class="tipoEnvio">
       <!-- BOTÓN PARA ABRIR MODAL -->
       <div id="modal">
@@ -62,11 +67,9 @@
       </button>
     </div>
       </div>
-
-    <br>
-      
       <div class="total">
         <p id="aviso" class="mt-2 text-center"></p>
+        <p id="faltaEnvio"></p>
         <ul>
           <li><h4>Resumen</h4></li>
           <hr>
@@ -82,7 +85,11 @@
               <option value="USD">Dólares (USD)</option>
             </select>
           </li>
-
+          <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">Comprar</button></li>
+        </ul>
+      </div>
+    </div>    
+    </div>
 <!-- MODAL DE SELECCIÓN -->
 <div class="modal fade" id="modalEnvio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEnvioLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -171,12 +178,6 @@
     </div>
   </div>
 </div>
-          <li><button type="button" class="btn btn-primary btn-lg" id="btn-comprar">Comprar</button></li>
-        </ul>
-      </div>
-      
-    </div>
-
 
     </main>
     <footer class="text-muted">
