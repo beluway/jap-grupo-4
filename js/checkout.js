@@ -8,6 +8,7 @@ const STORAGE_KEY = "tarjetas";
 const listaTarjetas = document.getElementById("listaTarjetas");
 const formNuevaTarjeta = document.getElementById("formNuevaTarjeta");
 const anioSelect = document.getElementById("anioVencimiento");
+let aviso = document.getElementById("aviso");
 
 // ================== AÑOS DINÁMICOS ==================
 if (anioSelect) {
@@ -63,6 +64,7 @@ if (formNuevaTarjeta) {
       const tab = new bootstrap.Tab(tabTrigger);
       tab.show();
     }
+
   });
 }
 
@@ -77,6 +79,9 @@ function mostrarTarjetaSeleccionada() {
   } else if (alerta) {
     alerta.classList.add("d-none");
   }
+
+  //borramos el aviso si se seleccionó una tarjeta
+    aviso.textContent = "";
 }
 
 // ================== CARGAR TARJETAS ==================
@@ -114,6 +119,7 @@ function cargarTarjetas() {
       </div>
     `;
     listaTarjetas.appendChild(col);
+
   });
 
   // ✅ Agregar eventos después de renderizar las tarjetas
@@ -139,7 +145,7 @@ function cargarTarjetas() {
 
 // ================== RESUMEN DEL PEDIDO ==================
 function mostrarResumen() {
-  const productos = JSON.parse(localStorage.getItem("cartProducts")) || [];
+  const productos = JSON.parse(localStorage.getItem("carrito")) || [];
   const nombreEnvio = localStorage.getItem("nombreEnvio") || "No seleccionado";
   const subtotalLS = parseFloat(localStorage.getItem("subtotalCarrito")) || 0;
   let porcentajeEnvioLS = parseFloat(localStorage.getItem("tipoEnvio")) || 0;
@@ -158,7 +164,7 @@ function mostrarResumen() {
   productos.forEach((p) => {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between";
-    li.innerHTML = `<span>${p.name} x${p.count}</span><span>$${(p.unitCost * p.count).toFixed(2)}</span>`;
+    li.innerHTML = `<span>${p.nombre} x${p.cantidad}</span><span>$${(p.precio * p.cantidad).toFixed(2)}</span>`;
     lista.appendChild(li);
   });
 
@@ -170,9 +176,31 @@ function mostrarResumen() {
   resumenTotal.textContent = `Total: $${totalLS.toFixed(2)}`;
 }
 
+//mostrar cofirmación de dirección guardada
+const direccion = document.getElementById("direccion");
+if (direccion){
+  const direccionEnvio = JSON.parse(localStorage.getItem("direccionEnvio")) || "No especificada";
+  direccion.textContent = `Dirección de envío: ${direccionEnvio.localidad}, ${direccionEnvio.departamento},
+   Calle: ${direccionEnvio.calle}, Numero:  ${direccionEnvio.numero}, Esquina: ${direccionEnvio.esquina}`;
+   direccion.style.color = "orange";
+}
 
-// ================== FINALIZAR COMPRA ==================
+
+/* // ================== FINALIZAR COMPRA ==================
 const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
+
+  //verificar que se haya seleccionado una tarjeta antes de finalizar compra
+  if(btnFinalizarCompra){
+    btnFinalizarCompra.addEventListener("click",()=>{
+      let tarjetaSeleccionada = localStorage.getItem("tarjetaSeleccionada");
+      if(!tarjetaSeleccionada){
+        aviso.textContent = "❌ Por favor seleccione una tarjeta para continuar con la compra.";
+      }
+    })
+  }
+
+  else{
+
 if (btnFinalizarCompra) {
   btnFinalizarCompra.addEventListener("click", () => {
     alert("✅ Compra realizada con éxito. ¡Gracias por tu pedido!");
@@ -189,6 +217,52 @@ if (btnFinalizarCompra) {
     localStorage.removeItem("tarjetaSeleccionada");
     window.location.href = "cart.html";
   });
+}
+} */
+
+// ================== FINALIZAR COMPRA (Corregido) ==================
+const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
+
+if (btnFinalizarCompra) {
+    btnFinalizarCompra.addEventListener("click", () => {
+        let tarjetaSeleccionada = localStorage.getItem("tarjetaSeleccionada");
+        let direccionEnvio = localStorage.getItem("direccionEnvio"); // ¡Opcional: puedes validar también la dirección aquí!
+
+        // 1. Validar la selección de la tarjeta
+        if (!tarjetaSeleccionada) {
+            // Mostrar error y detener la ejecución
+            if (aviso) {
+                aviso.textContent = "❌ Por favor seleccione una tarjeta para continuar con la compra.";
+                aviso.style.color = "red";
+            }
+            return; // Detiene la función aquí
+        }
+
+        // 2. Si la validación es exitosa: Ejecutar la compra
+        
+        // Limpiar el aviso si existía
+        if (aviso) {
+            aviso.textContent = "";
+        }
+
+        alert("✅ Compra realizada con éxito. ¡Gracias por tu pedido!");
+
+        // 3. Limpieza de LocalStorage (Asegúrate de que 'carrito' se limpie para empezar de nuevo)
+        localStorage.removeItem("carrito");
+        localStorage.removeItem("tipoEnvio");
+        localStorage.removeItem("porcentajeEnvio");
+        localStorage.removeItem("productID");
+        localStorage.removeItem("catID");
+        localStorage.removeItem("direccionEnvio");
+        localStorage.removeItem("costoEnvio");
+        localStorage.removeItem("nombreEnvio");
+        localStorage.removeItem("subtotalCarrito");
+        localStorage.removeItem("totalCarrito");
+        localStorage.removeItem("tarjetaSeleccionada");
+        
+        // 4. Redirigir al carrito o a una página de confirmación
+        window.location.href = "cart.html";
+    });
 }
 
 // ================== MODO OSCURO ==================

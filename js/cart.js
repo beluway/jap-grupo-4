@@ -331,6 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnAceptarEnvio = document.getElementById("btn-aceptar-envio");
   const montoProductos = document.getElementById("montoProductos");
   const totalConEnvioModal = document.getElementById("totalConEnvio");
+  let aviso = document.getElementById("aviso");
 
   // Recuperar carrito y envío desde localStorage
   let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -388,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mostrar costo de envío en el resumen
     if (tipoEnvioTexto) {
       tipoEnvioTexto.textContent = nombreEnvio
-        ?  `Envío: ${subtotal * envioSeleccionado/100}`
+        ?  `Envío: $${subtotal * envioSeleccionado/100}`
         : "No se ha seleccionado envío";
     }
     
@@ -475,6 +476,9 @@ if (btnAceptarEnvio) {
     // Actualizar la vista del carrito
     renderizarCarrito();
 
+    //borro el aviso si todo está correcto
+    aviso.textContent = "";
+
     // Cerrar modal
     const modal = bootstrap.Modal.getInstance(modalEnvio);
     modal.hide();
@@ -518,8 +522,11 @@ if (btnAceptarEnvio) {
     btnComprar.addEventListener("click", () => {
 
       if (carrito.length === 0) {
-      let aviso = document.getElementById("aviso");
-      aviso.textContent="¡ATENCIÓN! El carrito está vacío. Agregue algo antes de comprar.";
+      aviso.textContent="¡ATENCIÓN! El carrito está vacío. Agregue algo antes de continuar.";
+      aviso.style.color="red";
+    }
+    else if(envioSeleccionado === 0){
+      aviso.textContent = "¡ATENCIÓN! Debe seleccionar un tipo de envío antes de continuar."
       aviso.style.color="red";
     }
     else{
