@@ -147,6 +147,15 @@ div#envio{
     text-align: center;
 }
 
+.link-seguir-comprando{
+    display: flexbox;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    color: orange;
+}
+
 @media (max-width:600px){
     div.container{
         flex-direction: column;

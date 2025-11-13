@@ -141,15 +141,18 @@ function cargarTarjetas() {
   });
 }
 
+// ================== MONEDA ==================
+function obtenerSimboloMoneda() {
+  const moneda = localStorage.getItem("moneda") || "UYU";
+  return moneda === "USD" ? "US$" : "$";
+}
 
-// ================== RESUMEN DEL PEDIDO ==================
+
+// ================== RESUMEN DEL PEDIDO (versión con conversión de moneda) ==================
 function mostrarResumen() {
   const productos = JSON.parse(localStorage.getItem("carrito")) || [];
   const nombreEnvio = localStorage.getItem("nombreEnvio") || "No seleccionado";
-  const subtotalLS = parseFloat(localStorage.getItem("subtotalCarrito")) || 0;
   let porcentajeEnvioLS = parseFloat(localStorage.getItem("tipoEnvio")) || 0;
-  const costoEnvioLS = subtotalLS * porcentajeEnvioLS / 100;
-  const totalLS = parseFloat(localStorage.getItem("totalCarrito")) || 0;
 
   const lista = document.getElementById("listaResumen");
   const resumenEnvio = document.getElementById("resumenEnvio");
@@ -158,22 +161,43 @@ function mostrarResumen() {
 
   if (!lista || !resumenSubtotal || !resumenEnvio || !resumenTotal) return;
 
-  // Mostrar productos
+  const monedaActual = localStorage.getItem("moneda") || "UYU";
+  const simbolo = obtenerSimboloMoneda(monedaActual);
+
+  const TASA_DOLAR = 42; // 1 USD = 42 UYU
+  function convertirMoneda(precio, desde, hacia) {
+    if (desde === hacia) return precio;
+    if (desde === "USD" && hacia === "UYU") return precio * TASA_DOLAR;
+    if (desde === "UYU" && hacia === "USD") return precio / TASA_DOLAR;
+    return precio;
+  }
+
+  // Calcular subtotal sumando los productos convertidos
+  let subtotalConvertido = 0;
   lista.innerHTML = "";
   productos.forEach((p) => {
+    const precioConvertido = convertirMoneda(p.precio, p.moneda || "UYU", monedaActual);
+    const totalProducto = precioConvertido * p.cantidad;
+    subtotalConvertido += totalProducto;
+
     const li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between";
-    li.innerHTML = `<span>${p.nombre} x${p.cantidad}</span><span>$${(p.precio * p.cantidad).toFixed(2)}</span>`;
+    li.innerHTML = `<span>${p.nombre} x${p.cantidad}</span><span>${simbolo}${totalProducto.toFixed(2)}</span>`;
     lista.appendChild(li);
   });
 
-  // Mostrar resumen de totales
-  resumenSubtotal.textContent = `Subtotal: $${subtotalLS.toFixed(2)}`;
+  // Calcular envío y total
+  const envioConvertido = subtotalConvertido * porcentajeEnvioLS / 100;
+  const totalConvertido = subtotalConvertido + envioConvertido;
+
+  resumenSubtotal.textContent = `Subtotal: ${simbolo}${subtotalConvertido.toFixed(2)}`;
   resumenEnvio.textContent = nombreEnvio
-    ? `Envío (${nombreEnvio}): $${costoEnvioLS.toFixed(2)}`
-    : "Envío no seleccionado";
-  resumenTotal.textContent = `Total: $${totalLS.toFixed(2)}`;
+      ? `Envío (${nombreEnvio}): ${simbolo}${envioConvertido.toFixed(2)}`
+      : "Envío no seleccionado";
+  resumenTotal.textContent = `Total: ${simbolo}${totalConvertido.toFixed(2)}`;
 }
+
+
 
 //mostrar cofirmación de dirección guardada
 const direccion = document.getElementById("direccion");
@@ -199,8 +223,25 @@ if (btnFinalizarCompra) {
         faltaPago.textContent = "";
       }, 3000);
       return;
-    } //si llegamos hasta acá es porque se seleccionó un método de pago
+    } 
+
+    let transferenciaLS = localStorage.getItem("transferencia");
+    if(transferenciaLS){
+      let transferenciaRealizada = document.getElementById("transferenciaRealizada");
+      transferenciaRealizada.textContent = "Transferencia realizada con éxito ✅";
+      transferenciaRealizada.style.color = "green";
+      transferenciaRealizada.classList.remove("d-none");
+
+    }
+
+    //necesito retrasar la alerta de compra para que se vea el mensaje de transferencia realizada 
+    setTimeout(()=>{
+
+    
+    //si llegamos hasta acá es porque se seleccionó un método de pago
     alert("✅ Compra realizada con éxito. ¡Gracias por tu pedido!");
+
+    //limpiamos el localStorage
     localStorage.removeItem("carrito");
     localStorage.removeItem("tipoEnvio");
     localStorage.removeItem("porcentajeEnvio");
@@ -213,8 +254,13 @@ if (btnFinalizarCompra) {
     localStorage.removeItem("totalCarrito");
     localStorage.removeItem("tarjetaSeleccionada");
     localStorage.removeItem("transferencia");
-    window.location.href = "cart.html";
-  });
+
+    //redireccionamos a la página principal
+    window.location.href = "index.html";
+
+    }, 1000);//1000 ms de retraso 
+  }
+);
 }
 
 
@@ -232,6 +278,7 @@ if (chkOscuro && divFondo) {
     chkOscuro.checked = true;
     divFondo.classList.add("dark-mode");
   }
+
 }
 
 // ================== CARGA INICIAL ==================
@@ -252,12 +299,33 @@ document.addEventListener("DOMContentLoaded", () => {
 const btnTransferencia = document.getElementById('aceptar-trans');
 const modalTansferencia = document.getElementById('modal-transfer')
 
+const importe = document.getElementById("importe");
+const moneda = document.getElementById("moneda")
+let totalCarrito = localStorage.getItem("totalCarrito");
+let monedaLS = localStorage.getItem("moneda");
+
+  importe.value = totalCarrito;
+  importe.readOnly = true;
+
+  if (monedaLS === "USD"){
+    /* moneda.options[1].selected = true;
+    moneda.readOnly = true; */
+    moneda.value = "USD";
+    moneda.options.remove(0);
+  }
+  else{
+    moneda.value = "UYU";
+    moneda.options.remove(1);
+  }
+
 btnTransferencia.addEventListener('click',()=>{
 
   const origen = document.getElementById("cuenta-origen").value.trim();
   const importe = document.getElementById("importe").value.trim();
   const moneda = document.getElementById("moneda").value.trim();
   const asunto = document.getElementById("asunto").value.trim();
+
+  
 
   if(!origen || !importe || !moneda || !asunto){
     alert("Por favor complete todos los campos.");
@@ -269,5 +337,6 @@ btnTransferencia.addEventListener('click',()=>{
 
   // Cerrar modal
   const modal = bootstrap.Modal.getInstance(modalTansferencia);
+
   modal.hide();
 });
