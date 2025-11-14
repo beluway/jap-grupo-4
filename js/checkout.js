@@ -237,9 +237,6 @@ if (btnFinalizarCompra) {
     //necesito retrasar la alerta de compra para que se vea el mensaje de transferencia realizada 
     setTimeout(()=>{
 
-    
-    //si llegamos hasta acá es porque se seleccionó un método de pago
-    alert("✅ Compra realizada con éxito. ¡Gracias por tu pedido!");
 
     //limpiamos el localStorage
     localStorage.removeItem("carrito");
@@ -255,8 +252,7 @@ if (btnFinalizarCompra) {
     localStorage.removeItem("tarjetaSeleccionada");
     localStorage.removeItem("transferencia");
 
-    //redireccionamos a la página principal
-    window.location.href = "index.html";
+    finalDeCompra();
 
     }, 1000);//1000 ms de retraso 
   }
@@ -340,3 +336,58 @@ btnTransferencia.addEventListener('click',()=>{
 
   modal.hide();
 });
+
+
+//CONFETTI
+
+const confettiBtn = document.getElementById("confetti-btn");
+
+//OVERLAY AL FINALIZAR COMPRA
+
+const overlay = document.getElementById("overlay");
+const volverBtn = document.getElementById("volverBtn");
+
+volverBtn.addEventListener("click", () => {
+  window.location.href = "index.html";
+});
+
+// Función para mostrar el overlay con animación al final de la compra
+function showOverlay() {
+  const overlay = document.getElementById("overlay");
+
+  const text = overlay.querySelector(".slide-text");
+  text.style.animation = 'none';
+  void text.offsetWidth;
+  text.style.animation = '';
+
+  overlay.classList.add("show");
+}
+
+//Confetti
+function finalDeCompra(){
+  showOverlay();
+var end = Date.now() + (10 * 1000);
+
+var colors = ['#ff8c00ff', '#686868ff', '#004d80ff','#ffffffff'];
+
+(function frame() {
+  confetti({
+    particleCount: 4,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0 },
+    colors: colors
+  });
+  confetti({
+    particleCount: 4,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1 },
+    colors: colors
+  });
+
+  if (Date.now() < end) {
+    requestAnimationFrame(frame);
+  }
+}());
+}

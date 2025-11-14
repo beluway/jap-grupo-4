@@ -92,14 +92,14 @@
     </ul>
   </section>
 
-  <!--aviso de error-->
-  <p id="aviso-compra" class="mt-2"></p>
+  
 
     <!-- Botón de finalizar -->
     <div class="text-center mt-4">
       <button id="btnFinalizarCompra" class="btn btn-success btn-lg">Finalizar compra</button>
     </div>
-
+<!--aviso de error-->
+  <p id="aviso-compra" class="mt-2"></p>
     <div class="text-center mt-5">
       <a href="cart.html" > Volver al carrito</a>
     </div>
@@ -248,9 +248,14 @@
   <footer class="text-muted text-center mt-5">
     <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
     <a href="#">Volver arriba</a>
+    <!--AVISO FINAL-->
+    <div id="overlay">
+      <div class="slide-text"><h1>Gracias por tu compra!</h1><p>Tu compra se ha realizado con éxito.</p><button id="volverBtn" class="mt-2">Volver al inicio</button></div>
+    </div>
   </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/checkout.js" type="module"></script>
