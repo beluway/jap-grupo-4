@@ -1,5 +1,5 @@
 window.actualizarContadorCarrito = function() {
-  console.log("✅ Ejecutando actualizarContadorCarrito");
+  console.log("Ejecutando actualizarContadorCarrito");
 
   const cartCountElement = document.getElementById("cart-count");
   if (!cartCountElement) {
