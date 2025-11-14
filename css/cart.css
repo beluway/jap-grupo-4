@@ -1,4 +1,4 @@
-h3{
+h1{
     text-align: center;
     margin:0px 0 20px 0;
     padding-top: 20px;
@@ -58,6 +58,10 @@ div.total{
     max-height: fit-content;
     border-radius: 10px;
     width:300px;
+}
+
+.btn.btn-primary.modal-envio {
+    width: 300px;
 }
 
 .total ul{

@@ -51,10 +51,10 @@
 
   <div id="fondo">
     <main>
-      <h3>Tu carrito</h3>
+      <h1>Tu carrito</h1>
       <div class="container">
         <div class="">
-          <div class="carrito" id="productoCarrito"></div>
+          <div class="carrito mt-3" id="productoCarrito"></div>
           <a href="categories.html" class="link-seguir-comprando d-flex" >Seguir comprando</a>
         </div>
         
@@ -63,8 +63,9 @@
           <div class="tipoEnvio">
             <!-- BOTÓN PARA ABRIR MODAL -->
             <div id="modal">
-              <button type="button" class="btn btn-primary modal-envio mt-5" data-bs-toggle="modal" data-bs-target="#modalEnvio">
+              <button type="button" class="btn btn-primary modal-envio mt-3" data-bs-toggle="modal" data-bs-target="#modalEnvio">
                 Seleccionar Tipo de Envío
+                <p style="margin: 0">y  Dirección </p>
               </button>
             </div>
           </div>
@@ -74,11 +75,12 @@
             <ul>
               <li><h4>Resumen</h4></li>
               <hr>
-              <li id="tipoEnvioSeleccionado" class="text-secondary fst-italic"></li>
+              <li id="tipoEnvioSeleccionado" class="text-secondary fst-italic p-0"></li>
               <hr>
-              <li class="text-secondary fst-italic"><p>Productos: <span id="montoProductos"></span></p></li>
+              <li class="text-secondary fst-italic p-0"><p> Subtotal: <span id="montoProductos"></span></p></li>
               <hr>
-              <li><p><strong>Total: </strong><span class="precio"></span></p></li>
+              <li style="padding: 0"><p><strong>Total: </strong><span class="precio"></span></p></li>
+              <hr>
               <li> 
                 <label for="moneda">Mostrar precio en:</label>
                 <select id="moneda">
