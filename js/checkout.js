@@ -131,9 +131,17 @@ function cargarTarjetas() {
       // Guardar selección
       localStorage.setItem("tarjetaSeleccionada", JSON.stringify(seleccionada));
 
+      const tarjetaLS = localStorage.getItem("tarjetaSeleccionada");
+
       // Mostrar visualmente la tarjeta elegida
       mostrarTarjetaSeleccionada();
 
+      if(tarjetaLS){//deshabilito el btn de iniciar transferencia
+      const btnTransferencia = document.getElementById("btn-transferencia");
+      if(btnTransferencia){
+        btnTransferencia.disabled = true;
+      }
+    }
       // Cerrar el modal
       const modal = bootstrap.Modal.getInstance(document.getElementById("modalTarjeta"));
       modal.hide();
@@ -208,7 +216,6 @@ if (direccion){
    direccion.style.color = "orange";
 }
 
-
  // ================== FINALIZAR COMPRA ==================
 const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
 
@@ -234,9 +241,8 @@ if (btnFinalizarCompra) {
 
     }
 
-    //necesito retrasar la alerta de compra para que se vea el mensaje de transferencia realizada 
+    //necesito retrasar el evento de finalDeCompra para mostrar el mensaje de transferencia realizada
     setTimeout(()=>{
-
 
     //limpiamos el localStorage
     localStorage.removeItem("carrito");
@@ -331,11 +337,22 @@ btnTransferencia.addEventListener('click',()=>{
   const transferencia = { origen, importe, moneda, asunto};
   localStorage.setItem("transferencia", JSON.stringify(transferencia));
 
+  let transferenciaLS = localStorage.getItem("transferencia");
+  if (transferenciaLS){
+      //deshabilito modal de tarjeta si se seleccionoó la transferencia
+    const btnTarjeta = document.getElementById("btn-tarjeta");
+
+    if(btnTarjeta){
+      btnTarjeta.disabled = true;
+    }
+  }
+
   // Cerrar modal
   const modal = bootstrap.Modal.getInstance(modalTansferencia);
-
   modal.hide();
 });
+
+
 
 
 //CONFETTI
