@@ -368,18 +368,18 @@ function finalDeCompra(){
   showOverlay();
 var end = Date.now() + (10 * 1000);
 
-var colors = ['#ff8c00ff', '#686868ff', '#004d80ff','#ffffffff'];
+var colors = ['#ff8c00ff','#004d80ff','#ffffffff'];
 
 (function frame() {
   confetti({
-    particleCount: 4,
+    particleCount: 3,
     angle: 60,
     spread: 55,
     origin: { x: 0 },
     colors: colors
   });
   confetti({
-    particleCount: 4,
+    particleCount: 3,
     angle: 120,
     spread: 55,
     origin: { x: 1 },
