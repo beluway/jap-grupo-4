@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     //la incluyo en la URL del Json de forma dinámica con un string literal
     //idea 1: `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`
 
-    getJSONData(PRODUCTS_URL + catID + EXT_TYPE)
+    getJSONData(PRODUCTS_URL + catID)
         .then(function (resultObj) {
             if (resultObj.status === "ok") {
                 productsArray = resultObj.data.products;

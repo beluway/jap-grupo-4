@@ -19,7 +19,7 @@ userNameElement.textContent = usuario.email;
 
 //función que carga los comentarios si ya no los tenía guardados
 if(cargarComentarios ==null){
-  getJSONData(PRODUCT_INFO_COMMENTS_URL+productID+EXT_TYPE)
+  getJSONData(PRODUCT_INFO_COMMENTS_URL+productID)
   .then(resultObj =>{
     if (resultObj.status === "ok") {
       const comentarios = resultObj.data;
@@ -110,7 +110,7 @@ if (storedComentarios) {
   mostrarComentarios(comentarios);
 } else {
   // Si no hay nada en localStorage, pedimos a la API
-  getJSONData(PRODUCT_INFO_COMMENTS_URL + productID + EXT_TYPE)
+  getJSONData(PRODUCT_INFO_COMMENTS_URL + productID)
     .then(resultObj => {
       if (resultObj.status === "ok") {
         comentarios = resultObj.data;
@@ -169,7 +169,7 @@ chkOscuro.addEventListener('change', () => {
 });
 
 //SECCIÓN COMPRAR QUE DERIVA A LA PANTALLA DEL CARRITO
-getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
+getJSONData(PRODUCT_INFO_URL + productID)
   .then(resultObj => {
     if (resultObj.status === "ok") {
       const product = resultObj.data;
