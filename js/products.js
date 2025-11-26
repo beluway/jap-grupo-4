@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     //la incluyo en la URL del Json de forma dinámica con un string literal
     //idea 1: `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`
 
-    getJSONData(PRODUCTS_URL + catID)
+    getProtectedJSONData(PRODUCTS_URL + catID)
         .then(function (resultObj) {
             if (resultObj.status === "ok") {
                 productsArray = resultObj.data.products;
@@ -39,6 +39,10 @@ function showProductsList(array) {
         <td class="sold">${product.soldCount}</td>
         <td class="price">${product.currency}${product.cost}</td>
      </tr>`;
+    }
+
+    if(htmlContentToAppend==""){
+        htmlContentToAppend = "<p style='color:red;'>Esta categoría está vacía</p>";
     }
     document.getElementById("products-list").innerHTML = htmlContentToAppend;
     clickProduct();

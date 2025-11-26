@@ -68,10 +68,15 @@ app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
  */
+/* const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const cors = require('cors'); */
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 
 const app = express();
@@ -82,19 +87,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000;
-
-const jwt = require('jsonwebtoken');
 const SECRET_KEY = "CLAVESECRETA";
+
 // Importa el middleware
-const verificarToken = require('./middleware/verificarToken'); // Ajusta la ruta si es necesario
+const verificarToken = require('./middleware/verificarToken'); 
 
-const apiRouter = express.Router();
-apiRouter.use(verificarToken);
 
-// Conecta el router a la aplicación
-app.use('/emercado-api', apiRouter);
 
-// Auth
+// =============================
+// LOGIN (ruta pública)
+// =============================
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "admin" && password === "admin") {
@@ -106,18 +108,62 @@ app.post("/login", (req, res) => {
 });
 
 
+// =============================
+// RUTAS PROTEGIDAS
+// =============================
 
-// Base folder where your JSONs are stored (project root: one level up from backend)
+const apiRouter = express.Router();
+apiRouter.use(verificarToken);
+
+// Carpeta donde están los JSON
+const dataDir = path.join(__dirname, 'emercado-api');
+console.log('dataDir:', dataDir);
+
+// Conecta el router a la aplicación
+app.use('/emercado-api', apiRouter);
+
+apiRouter.get('/:folder/:file', (req, res) => {
+  const folder = req.params.folder;
+  const file = req.params.file;
+
+  const filePath = path.join(dataDir, folder, `${file}.json`);
+  console.log("Buscando:", filePath);
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: 'JSON file not found' });
+  }
+
+  try {
+    const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    res.json(jsonData);
+  } catch (err) {
+    res.status(500).json({ error: 'Error reading JSON file' });
+  }
+});
+
+// Monta el router protegido
+app.use('/emercado-api', apiRouter);
+
+// Para servir los JSON de emercado-api
+app.use('/emercado-api', express.static(path.join(__dirname, 'emercado-api')));
+
+app.listen(PORT, () => {
+  console.log(`API running on http://localhost:${PORT}`);
+  });
+
+
+
+/* // Base folder where your JSONs are stored (project root: one level up from backend)
 const dataDir = path.join(__dirname, '..', 'emercado-api');
 // Helpful log so you can see the resolved path when the server starts
-console.log('dataDir:', dataDir);
+console.log('dataDir:', dataDir); */
 
 
 //PAUTA 2
 //Metodo GET que obtiene los archivos JSON
 //le pasamos parametros folder(subcarpeta dentro de emercado-api) y file(nombre o id del JSON)
 
-//apiRouter.get ... para proteger estas rutas también
+/* //apiRouter.get ... para proteger estas rutas también
 app.get('/:folder/:file', (req, res) => { 
   const folder = req.params.folder;
   const file = req.params.file;
@@ -142,6 +188,6 @@ app.get('/:folder/:file', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`API is running on http://localhost:${PORT}`);
-});
+}); */
 
 

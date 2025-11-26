@@ -41,7 +41,7 @@ function setCatID(id) {
     window.location = "products.html";
 }
 
-function showCategoriesList(){
+/* function showCategoriesList(){
 
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
@@ -70,7 +70,43 @@ function showCategoriesList(){
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
+} */
+
+function showCategoriesList() {
+    let htmlContentToAppend = "";
+
+    if (!Array.isArray(currentCategoriesArray)) return;
+
+    for (let i = 0; i < currentCategoriesArray.length; i++) {
+        const category = currentCategoriesArray[i];
+
+        if (
+            (minCount === undefined || parseInt(category.productCount) >= minCount) &&
+            (maxCount === undefined || parseInt(category.productCount) <= maxCount)
+        ) {
+            htmlContentToAppend += `
+                <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
+                    <div class="category">
+                        <div class="image">
+                            <img src="${category.imgSrc}" alt="${category.description}">
+                        </div>
+                        <div class="text">
+                            <div class="name-count d-flex w-100 justify-content-between">
+                                <h4>${category.name}</h4>
+                                <small class="text-muted">${category.productCount} artículos</small>
+                            </div>
+                            <p>${category.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 }
+
+
 
 function sortAndShowCategories(sortCriteria, categoriesArray){
     currentSortCriteria = sortCriteria;
@@ -89,14 +125,24 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CATEGORIES_URL).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            currentCategoriesArray = resultObj.data
-            showCategoriesList()
-            //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
-        }
-        
-    });
+
+    const token = localStorage.getItem("jwtToken");
+    if (!token) window.location.href = "login.html";
+
+    //llamo a la función que hace fetch al backend e incluye el token en el header
+getProtectedJSONData(CATEGORIES_URL).then(function(resultObj){
+    if (resultObj.status === "ok"){
+
+        // El backend devuelve directamente un ARRAY, no un objeto
+        currentCategoriesArray = resultObj.data
+
+        showCategoriesList();
+    } else {
+        document.getElementById("cat-list-container").innerHTML =
+            `<p class="text-danger">Error cargando categorías.</p>`;
+    }
+});
+
 
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowCategories(ORDER_ASC_BY_NAME);
