@@ -27,9 +27,44 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Función para manejar el inicio de sesión y guardar el token
+async function handleLogin(username, password) {
+    try {
+        const response = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // Enviar credenciales en el cuerpo (req.body en tu backend)
+            body: JSON.stringify({ username, password })
+        });
+
+        // Verificar si la petición fue exitosa (código 200)
+        if (response.ok) {
+            const data = await response.json();
+            const token = data.token;
+
+            // 🟢 GUARDAR TOKEN EN localStorage 🟢
+            localStorage.setItem('jwtToken', token);
+            
+            console.log("Inicio de sesión exitoso. Token guardado.");
+            // Aquí redirigirías al usuario a la página principal.
+            return true;
+        } else {
+            // Manejar errores de credenciales (ej: 401 Unauthorized)
+            const errorData = await response.json();
+            console.error('Error de autenticación:', errorData.error);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error de conexión con el servidor:', error);
+        return false;
+    }
+}
+
 
   //función a ejecutar cuando le demos click a ingresar
-loginForm.addEventListener("submit", function(event) {
+loginForm.addEventListener("submit", async function(event) { //HACER ESTA FUNCIÓN ASYNC
     event.preventDefault(); // Evita que se recargue la página
 
     const email = emailInput.value.trim();
@@ -52,8 +87,19 @@ loginForm.addEventListener("submit", function(event) {
       setUsuario(email, clave, "sessionStorage");
         localStorage.removeItem("usuario"); //si no se marcó la opción no hay necesidad de guardar al usuario// Limpia localStorage si existía
     }
+    //le paso justamente las credenciales que espera 
+    const loginExitoso = await handleLogin("admin", "admin");
 
-    window.location.href = "index.html"; //redirige a la página principal
+    // Solo redirigir si el login fue exitoso Y el token se guardó.
+    if (loginExitoso) {
+        // Muestra un mensaje amigable antes de redirigir
+        console.log("Login y token guardado con éxito. Redirigiendo...");
+        window.location.href = "index.html"; 
+    } else {
+        // Si no fue exitoso, la función handleLogin ya mostró el error
+        alert("Error al iniciar sesión. Verifica tus credenciales.");
+        return;
+    }
 
 });
   

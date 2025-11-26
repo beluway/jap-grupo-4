@@ -75,7 +75,36 @@ const cors = require('cors');
 
 
 const app = express();
+app.use(cors());
+// Middleware para parsear JSON (usado comúnmente en peticiones API, como para el login)
+app.use(express.json());
+// Middleware para parsear datos de formularios (x-www-form-urlencoded)
+app.use(express.urlencoded({ extended: true }));
+
 const PORT = 3000;
+
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = "CLAVESECRETA";
+// Importa el middleware
+const verificarToken = require('./middleware/verificarToken'); // Ajusta la ruta si es necesario
+
+const apiRouter = express.Router();
+apiRouter.use(verificarToken);
+
+// Conecta el router a la aplicación
+app.use('/emercado-api', apiRouter);
+
+// Auth
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === "admin" && password === "admin") {
+    const token = jwt.sign({ username }, SECRET_KEY);
+    res.status(200).json({ token });
+  } else {
+    res.status(401).json({ message: "Usuario y/o contraseña incorrecto" });
+  }
+});
+
 
 
 // Base folder where your JSONs are stored (project root: one level up from backend)
@@ -87,7 +116,8 @@ console.log('dataDir:', dataDir);
 //PAUTA 2
 //Metodo GET que obtiene los archivos JSON
 //le pasamos parametros folder(subcarpeta dentro de emercado-api) y file(nombre o id del JSON)
-app.use(cors());
+
+//apiRouter.get ... para proteger estas rutas también
 app.get('/:folder/:file', (req, res) => { 
   const folder = req.params.folder;
   const file = req.params.file;
