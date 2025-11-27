@@ -77,7 +77,14 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const mariadb = require("mariadb");
 
+const pool = mariadb.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "e-commerce",
+});
 
 const app = express();
 app.use(cors());
@@ -91,8 +98,6 @@ const SECRET_KEY = "CLAVESECRETA";
 
 // Importa el middleware
 const verificarToken = require('./middleware/verificarToken'); 
-
-
 
 // =============================
 // LOGIN (ruta pública)
@@ -150,6 +155,25 @@ app.use('/emercado-api', express.static(path.join(__dirname, 'emercado-api')));
 app.listen(PORT, () => {
   console.log(`API running on http://localhost:${PORT}`);
   });
+
+
+
+app.post("/emercado-api/cart", async (req, res) => {
+  let conn;
+  try{
+    conn = await pool.getConnection();
+    await conn.query("USE e-commerce")
+    const response = await conn.query ("INSERT INTO cart(productId, name, quantity, totalPrice) value (?, ?, ?, ?)",
+    [req.body.productId, req.body.name, req.body.quantity, req.body.totalPrice]);
+
+    res.json({id:parseInt(response.insertId), ...req.body})
+
+  } catch (error) {
+    res.status(500).json({message: "No se pudo cargar la información"})
+  } finally {
+    if (conn) conn.release();
+  }
+});
 
 
 
