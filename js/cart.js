@@ -210,59 +210,47 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 async function enviarCarrito() {
-    console.log("enviarCarrito() fue ejecutada");
-    const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
-    let successCount = 0; // Contador de envíos exitosos
+  console.log("enviarCarrito() fue ejecutada");
 
-    // 🛑 VERIFICACIÓN: Nos aseguramos de tener el token.
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
-        console.error("No se encontró el token de autenticación (jwtToken). Asegúrate de iniciar sesión.");
-        // Podrías redirigir al login aquí si es necesario
-        return false;
+  const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  if (cartItems.length === 0) {
+    return true; // No hay nada que enviar
+  }
+
+  // Arma el array en el formato que se estableció en el backend/sql
+  const data = cartItems.map(item => ({
+    productId: parseInt(item.productId),
+    quantity: parseInt(item.cantidad),
+    currency: item.moneda,
+    name: item.nombre,
+    price: parseInt(item.precio),
+    totalPrice: parseInt(item.precio * item.cantidad)
+  }));
+
+  try {
+    const response = await fetch("http://localhost:3000/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ cart: data }) //Envío el array como propiedad "cart"
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log("Carrito enviado correctamente:", result);
+      return true;
+    } else {
+      const errorBody = await response.json().catch(() => ({}));
+      console.error(`Error ${response.status} al enviar carrito:`, response.statusText, errorBody);
+      return false;
     }
-    // 🛑 FIN DE VERIFICACIÓN
 
-    if (cartItems.length === 0) {
-        return true; // No hay nada que enviar
-    }
-
-    for (let item of cartItems) {// Usamos las propiedades correctas de tu objeto (cantidad, moneda, nombre, precio)
-        const data = {
-            productId: item.productId,
-            quantity: item.cantidad,
-            currency: item.moneda,
-            name: item.nombre,
-            price: item.precio,
-            totalPrice: item.precio * item.cantidad
-        };
-
-        try {
-            const response = await fetch("http://localhost:3000/cart", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization":`Bearer ${localStorage.getItem("jwtToken")}` // Usamos la variable verificada
-                },
-                body: JSON.stringify(data)
-            });
-
-            // response.ok verifica si el estado HTTP está en el rango 200-299
-            if (response.ok) {
-                const result = await response.json();
-                console.log("Guardado exitoso para el ítem:", result);
-                successCount++;
-            } else {
-                const errorBody = await response.json().catch(() => ({}));
-                console.error(`Error ${response.status} al guardar el ítem ${item.productId}:`, response.statusText, errorBody);
-            }
-        } catch (error) {
-            console.error("Error de red al enviar el carrito:", error);
-        }
-    }
-    
-    // 🛑 Devolvemos un booleano indicando si TODOS los ítems se guardaron.
-    return successCount === cartItems.length; 
+  } catch (error) {
+    console.error("Error de red al enviar el carrito:", error);
+    return false;
+  }
 };
 
 // ========== BOTÓN COMPRAR (MODIFICADO PARA ESPERAR LA FUNCIÓN ASÍNCRONA) ==========

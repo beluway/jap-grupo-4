@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
 const mariadb = require("mariadb");
 
 const dbConfig = {
-  host: "localhost",
+  host: "localhost",
   user: "root",
   password: "root", //cambiar la contraseña
-  port: 3307, //cambiar por el verdadero puerto
+  port: 3306, //cambiar por el verdadero puerto
   multipleStatements: true,
 };
 
@@ -110,6 +110,62 @@ apiRouter.get('/:folder/:file', (req, res) => {
 app.use('/emercado-api', apiRouter);
 
 app.use('/emercado-api', express.static(path.join(__dirname, 'emercado-api')));
+
+//CART POST
+app.post('/cart', async (req, res) => {
+  let conn;
+  try {
+    conn = await dbPool.getConnection();
+
+    const cart = req.body.cart || []; //Array del frontend
+
+    //Vacia la tabla antes de insertar los nuevos items para que no se acumulen duplicados
+    await conn.query("DELETE FROM cart");
+
+    //Insert
+    const sql = `
+      INSERT INTO cart (productId, quantity, currency, name, price, totalPrice)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    for (let item of cart) {
+      await conn.query(sql, [
+        item.productId,
+        item.quantity,
+        item.currency,
+        item.name,
+        item.price,
+        item.totalPrice
+      ]);
+    }
+
+    res.json({ message: "Carrito reemplazado con éxito", cart });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "No se pudo actualizar el carrito" });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+app.get('/cart', async (req, res) => {
+    try {
+    const [rows] = await dbPool.query("SELECT * FROM cart");
+
+    res.json({
+      success: true,
+      data: rows
+    });
+
+  } catch (error) {
+    console.error("DB error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Database error"
+    });
+  }
+});
 
 // Envuelve la inicialización antes de iniciar el servidor
 initializeDatabase().then(() => {

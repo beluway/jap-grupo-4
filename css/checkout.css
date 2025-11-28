@@ -67,3 +67,21 @@ div.moneda{
   cursor: pointer;
   font-weight: bold;
 }
+@keyframes slideDownMobile {
+    from {
+      transform: translateY(-200px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(35%);
+      opacity: 1;
+    }
+  } 
+
+@media screen and (max-width:700px){
+
+  .slide-text {
+  font-size: 2rem;
+  animation: slideDownMobile 1s ease forwards;
+}
+}
