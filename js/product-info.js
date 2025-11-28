@@ -196,6 +196,7 @@ getProtectedJSONData(PRODUCT_INFO_URL + productID)
       if (btnComprar) {
         btnComprar.addEventListener("click", () => {
           const producto = {
+            productId: product.id,
             nombre: product.name,
             precio: product.cost,
             imagen: product.images[0] || "img/default.png",

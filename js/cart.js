@@ -209,7 +209,97 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ========== BOTÓN COMPRAR ==========
+async function enviarCarrito() {
+    console.log("enviarCarrito() fue ejecutada");
+    const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
+    let successCount = 0; // Contador de envíos exitosos
+
+    // 🛑 VERIFICACIÓN: Nos aseguramos de tener el token.
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
+        console.error("No se encontró el token de autenticación (jwtToken). Asegúrate de iniciar sesión.");
+        // Podrías redirigir al login aquí si es necesario
+        return false;
+    }
+    // 🛑 FIN DE VERIFICACIÓN
+
+    if (cartItems.length === 0) {
+        return true; // No hay nada que enviar
+    }
+
+    for (let item of cartItems) {// Usamos las propiedades correctas de tu objeto (cantidad, moneda, nombre, precio)
+        const data = {
+            productId: item.productId,
+            quantity: item.cantidad,
+            currency: item.moneda,
+            name: item.nombre,
+            price: item.precio,
+            totalPrice: item.precio * item.cantidad
+        };
+
+        try {
+            const response = await fetch("http://localhost:3000/cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization":`Bearer ${localStorage.getItem("jwtToken")}` // Usamos la variable verificada
+                },
+                body: JSON.stringify(data)
+            });
+
+            // response.ok verifica si el estado HTTP está en el rango 200-299
+            if (response.ok) {
+                const result = await response.json();
+                console.log("Guardado exitoso para el ítem:", result);
+                successCount++;
+            } else {
+                const errorBody = await response.json().catch(() => ({}));
+                console.error(`Error ${response.status} al guardar el ítem ${item.productId}:`, response.statusText, errorBody);
+            }
+        } catch (error) {
+            console.error("Error de red al enviar el carrito:", error);
+        }
+    }
+    
+    // 🛑 Devolvemos un booleano indicando si TODOS los ítems se guardaron.
+    return successCount === cartItems.length; 
+};
+
+// ========== BOTÓN COMPRAR (MODIFICADO PARA ESPERAR LA FUNCIÓN ASÍNCRONA) ==========
+const btnComprar = document.getElementById("btn-comprar");
+if (btnComprar) {
+    btnComprar.addEventListener("click", async () => { // 🛑 Hacer la función ASÍNCRONA
+        
+        if (carrito.length === 0) {
+            let aviso = document.getElementById("aviso");
+            aviso.textContent="¡ATENCIÓN! El carrito está vacío. Agregue algo antes de comprar.";
+            aviso.style.color="red";
+            setTimeout(() => {
+                aviso.textContent = "";
+            }, 3000);
+        } else if (envioSeleccionado === 0 || !localStorage.getItem("direccionEnvio")) {
+            let faltaEnvio = document.getElementById("faltaEnvio");
+            faltaEnvio.textContent="¡ATENCIÓN! Por favor complete los datos de envío.";
+            faltaEnvio.style.color="red";
+            setTimeout(() => {
+                faltaEnvio.textContent = "";
+            }, 3000);
+        }
+        else {
+            // 🛑 Esperar a que el envío del carrito termine
+            const success = await enviarCarrito(); 
+
+            if (success) {
+                alert("Carrito enviado a la base de datos");
+                window.location = "checkout.html";
+            } else {
+                alert("ADVERTENCIA: Falló el envío de algunos productos. Revise la consola.");
+            }
+        }
+    });
+}
+
+ /*  // ========== BOTÓN COMPRAR ==========
   const btnComprar = document.getElementById("btn-comprar");
   if (btnComprar) {
     btnComprar.addEventListener("click", () => {
@@ -234,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location = "checkout.html";
     }
     });
-  }
+  } */
 
   // ========== EVENTO CAMBIO DE MONEDA ==========
   if (selectorMoneda) {
@@ -275,7 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-async function enviarCarrito() {
+/* async function enviarCarrito() {
   // obtener carrito actual (del localStorage o del array que uses)
    console.log("enviarCarrito() fue ejecutada");
   const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -283,13 +373,15 @@ async function enviarCarrito() {
   for (let item of cartItems) {
     const data = {
       productId: item.id,
-      name: item.name,
-      quantity: item.count,
-      totalPrice: item.unitCost * item.count
+      quantity: item.cantidad,
+      currency: item.moneda,
+      name: item.nombre,
+      price: item.precio,
+      totalPrice: item.precio * item.cantidad
     };
 
     try {
-      const response = await fetch("http://localhost:3000/emercado-api/cart", {
+      const response = await fetch("http://localhost:3000/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -299,12 +391,15 @@ async function enviarCarrito() {
       });
 
       const result = await response.json();
-      console.log("Guardado:", result);
+      if(response.status==="200")
+        {console.log("Guardado:", result);
+      alert("Carrito enviado a la base de datos");
+      }
+      
 
     } catch (error) {
       console.error("Error al enviar el carrito:", error);
     }
   }
 
-  alert("Carrito enviado a la base de datos");
-}
+} */
