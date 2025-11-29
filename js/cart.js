@@ -111,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (montoEnvioSpan){
           montoEnvioSpan.textContent = `${monedaActual === "USD" ? "US$" : "$"}${(montoEnvio).toFixed(2)}`;
         }
-        //montoEnvioSpan.textContent = `$${montoEnvio.toFixed(2)}`;
       });
     });
 
@@ -287,32 +286,7 @@ if (btnComprar) {
     });
 }
 
- /*  // ========== BOTÓN COMPRAR ==========
-  const btnComprar = document.getElementById("btn-comprar");
-  if (btnComprar) {
-    btnComprar.addEventListener("click", () => {
 
-      if (carrito.length === 0) {
-      let aviso = document.getElementById("aviso");
-      aviso.textContent="¡ATENCIÓN! El carrito está vacío. Agregue algo antes de comprar.";
-      aviso.style.color="red";
-       setTimeout(() => {
-        aviso.textContent = "";
-      }, 3000);
-    }else if(envioSeleccionado === 0 || !localStorage.getItem("direccionEnvio")){
-      let faltaEnvio = document.getElementById("faltaEnvio");
-      faltaEnvio.textContent="¡ATENCIÓN! Por favor complete los datos de envío.";
-      faltaEnvio.style.color="red";
-       setTimeout(() => {
-        faltaEnvio.textContent = "";
-      }, 3000);
-    }
-    else{
-      enviarCarrito();
-      window.location = "checkout.html";
-    }
-    });
-  } */
 
   // ========== EVENTO CAMBIO DE MONEDA ==========
   if (selectorMoneda) {
@@ -353,41 +327,3 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* async function enviarCarrito() {
-  // obtener carrito actual (del localStorage o del array que uses)
-   console.log("enviarCarrito() fue ejecutada");
-  const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
-
-  for (let item of cartItems) {
-    const data = {
-      productId: item.id,
-      quantity: item.cantidad,
-      currency: item.moneda,
-      name: item.nombre,
-      price: item.precio,
-      totalPrice: item.precio * item.cantidad
-    };
-
-    try {
-      const response = await fetch("http://localhost:3000/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("jwtToken")  // obligatorio por middleware
-        },
-        body: JSON.stringify(data)
-      });
-
-      const result = await response.json();
-      if(response.status==="200")
-        {console.log("Guardado:", result);
-      alert("Carrito enviado a la base de datos");
-      }
-      
-
-    } catch (error) {
-      console.error("Error al enviar el carrito:", error);
-    }
-  }
-
-} */

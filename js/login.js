@@ -1,6 +1,5 @@
 
 
-import { Usuario } from "./clases/Usuario.js";
 import { getUsuario } from "./clases/Usuario.js";
 import { setUsuario } from "./clases/Usuario.js";
 
@@ -44,7 +43,7 @@ async function handleLogin(username, password) {
             const data = await response.json();
             const token = data.token;
 
-            // 🟢 GUARDAR TOKEN EN localStorage 🟢
+            // GUARDAR TOKEN EN localStorage 
             localStorage.setItem('jwtToken', token);
             
             console.log("Inicio de sesión exitoso. Token guardado.");
